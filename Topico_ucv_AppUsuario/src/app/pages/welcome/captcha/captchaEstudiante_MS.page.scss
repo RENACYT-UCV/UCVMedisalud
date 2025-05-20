@@ -1,0 +1,37 @@
+/* captcha.page.scss */
+.captcha-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .captcha-container {
+    text-align: center;
+  }
+  
+  .captcha-display {
+    font-style: italic;
+    font-weight: bold;
+    background-color: silver;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  ion-button {
+    --background: #3880ff;
+    --background-activated: #3dc2ff;
+    --background-focused: #3dc2ff;
+    --background-hover: #3dc2ff;
+    --border-radius: 10px;
+  }
+  
+  ion-input {
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+    --placeholder-color: #888;
+    --placeholder-font-style: italic;
+    --placeholder-font-weight: bold;
+  }
+  

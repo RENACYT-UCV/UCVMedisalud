@@ -1,0 +1,48 @@
+<app-header-estudiante-ms title="Login"></app-header-estudiante-ms>
+<ion-content class="content-background">
+  <div class="d-flex-center">
+    <!-- Este es el formulario -->
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit">
+      <app-logo-estudiante-ms class="animated-logo"></app-logo-estudiante-ms>
+
+      <!--=============== Email ===================-->
+      <app-custom-input-estudiante-ms 
+        autocomplete="email" 
+        [control]="form.controls.hotm"
+        type="email"
+        label="Correo"
+        class="input-field"
+      ></app-custom-input-estudiante-ms>
+
+      <div class="validators" *ngIf="form.controls.hotm.errors && form.controls.hotm.touched">
+        <div *ngIf="form.controls.hotm.errors?.['required']">El correo es requerido</div>
+        <div *ngIf="form.controls.hotm.errors?.['email']">Ingrese un correo válido</div>
+      </div>
+      <!--=============== Email ===================-->
+
+      <app-custom-input-estudiante-ms 
+        [control]="form.controls.cont"
+        label="Contraseña"
+        class="input-field"
+      ></app-custom-input-estudiante-ms>
+
+      <div class="validators" *ngIf="form.controls.cont.errors && form.controls.cont.touched">
+        <div *ngIf="form.controls.cont.errors?.['required']">La contraseña es requerida</div>
+      </div>
+
+      <p routerLink="forgot-password" class="forgot-password-link">¡Olvidaste tu contraseña?</p>
+
+      <!-- Botones -->
+      <ion-button expand="block" mode="ios" class="submit-button" type="submit" [disabled]="form.invalid">
+        Ingresar
+      </ion-button>
+
+      <ion-button class="ion-margin-top register-button" routerLink="sign-up" expand="block" mode="ios" fill="outline">
+        Registrar
+      </ion-button>
+    </form>
+  </div>
+  <!-- Botón de retroceso -->
+  <ion-button class="back-button" routerLink="/welcome" expand="block" mode="ios" fill="outline">
+  </ion-button>
+</ion-content>

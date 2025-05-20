@@ -1,0 +1,43 @@
+ion-menu {
+    ion-toolbar {
+      background-color: #003B5C; /* Color de fondo azul oscuro de la Universidad César Vallejo */
+      border-bottom: 1px solid #e90404; /* Borde blanco */
+  
+      app-header {
+        color: #e40303; /* Color blanco para el título */
+      }
+    }
+  
+    ion-content {
+      background-color: #003B5C; /* Color de fondo celeste */
+  
+      ion-menu-toggle {
+        ion-item {
+          background-color:#003B5C; /* Color de fondo blanco para los items */
+          color: #003B5C; /* Color azul oscuro para el texto */
+  
+          &.active {
+            background-color: #003B5C; /* Color de fondo azul oscuro para el item activo */
+            color: #003B5C; /* Color blanco para el texto del item activo */
+          }
+        }
+      }
+    }
+  
+    ion-footer {
+      background-color: #003B5C; /* Color de fondo azul oscuro */
+  
+      ion-menu-toggle {
+        ion-item {
+          color: #003B5C; /* Color blanco para el texto */
+        }
+      }
+    }
+  }
+  
+  :root {
+    --ion-color-mi-color: #B0E0E6; /* Color celeste */
+  }
+  ion-icon {
+    color: #3880ff;
+  }

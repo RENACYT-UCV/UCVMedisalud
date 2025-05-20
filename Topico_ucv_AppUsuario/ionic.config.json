@@ -1,0 +1,7 @@
+{
+  "name": "UCV_MEDIC",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

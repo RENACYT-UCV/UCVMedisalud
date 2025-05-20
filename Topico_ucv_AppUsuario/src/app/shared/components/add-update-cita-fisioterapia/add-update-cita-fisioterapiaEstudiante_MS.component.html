@@ -1,0 +1,97 @@
+<app-header-estudiante-ms [isModal]="true" [title]="cita ? 'Actualizar Cita' : 'Agregar Cita'"></app-header-estudiante-ms>
+
+<ion-content>
+  <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
+   
+    <!-- Mostrar imagen si existe -->
+    <ion-avatar *ngIf="form.value.fotogra">
+      <img [src]="form.value.fotogra" />
+    </ion-avatar>
+    <!-- Mostrar icono de documento si no hay imagen -->
+      
+    <br>
+    <!-- Botón para tomar/seleccionar una foto -->
+    <ion-button (click)="takeImage()" mode="ios" size="small" shape="round">
+      Tomar/Seleccionar
+    </ion-button>
+
+    <!-- Nombre -->
+    <app-custom-input-estudiante-ms
+      autocomplete="name" 
+      [control]="form.controls.nom"
+      type="text"
+      label="Nombre"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- DNI -->
+    <app-custom-input-estudiante-ms
+      autocomplete="off" 
+      [control]="form.controls.identific"
+      type="text"
+      label="DNI"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- Teléfono -->
+    <app-custom-input-estudiante-ms 
+      [control]="form.controls.sold"
+      type="number"
+      label="Teléfono"
+      (ionInput)="setNumberInputs()"
+    ></app-custom-input-estudiante-ms>
+
+        <!-- Día -->
+    <ion-item>
+      <ion-label>Día</ion-label>
+      <ion-select formControlName="di" (ionChange)="updateFechaFromDia()">
+        <ion-select-option *ngFor="let di of dias" [value]="di.valor">{{ di.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Fecha -->
+    <app-custom-input-estudiante-ms 
+      [control]="form.controls.fec"
+      type="date"
+      label="Fecha"
+      (ionInput)="setNumberInputs()"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- Facultad -->
+    <app-custom-input-estudiante-ms 
+      autocomplete="facultad" 
+      [control]="form.controls.carre"
+      type="text"
+      label="Facultad"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- Email -->
+    <app-custom-input-estudiante-ms 
+      autocomplete="email" 
+      [control]="form.controls.hotm"
+      type="text"
+      label="email"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- Hora -->
+    <app-custom-input-estudiante-ms 
+      [control]="form.controls.tim"
+      type="time"
+      label="Hora"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- Doctor -->
+    <ion-item>
+      <ion-label>Doctor</ion-label>
+      <ion-select formControlName="med">
+        <ion-select-option *ngFor="let med of doctors" [value]="med">{{med}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+     
+    <!-- Botón de enviar -->
+    <ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
+      {{ cita ? 'Actualizar Cita' : 'Generar Cita' }}
+    </ion-button>
+
+  </form>
+</ion-content>

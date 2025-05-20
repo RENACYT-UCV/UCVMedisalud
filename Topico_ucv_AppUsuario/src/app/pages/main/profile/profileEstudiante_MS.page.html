@@ -1,0 +1,51 @@
+<app-header-estudiante-ms [showMenu]="true"  title="Perfil"></app-header-estudiante-ms>
+<ion-content class="ion-padding-top ion-text-center">
+  <ion-card>
+    <ion-avatar>
+      <img *ngIf="user()?.fotogra" [src]="user()?.fotogra" />
+      <ion-icon   *ngIf="!user()?.fotogra" class="empty-icon" name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+  
+    <ion-button color = "primary"class="photo-btn()"  (click)="takeImage()"mode="ios" size="small" shape="round">
+    </ion-button>
+
+    <ion-card-header>
+      <ion-card-title class="user-name">{{user().nom}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item lines="none" class="user-info">
+        <ion-label>
+          <h2>Teléfono:</h2>
+          <p>{{user().fono}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="user-info">
+        <ion-label>
+          <h2>DNI:</h2>
+          <p>{{user().identific}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="user-info">
+        <ion-label>
+          <h2>Facultad:</h2>
+          <p>{{user().carre}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="user-info">
+        <ion-label>
+          <h2>Email:</h2>
+          <p>{{user().hotm}}</p>
+        </ion-label>
+      </ion-item>
+      
+      <ion-item button detail >
+        <ion-label>Terminos & Condiciones</ion-label>
+      </ion-item><br><br><br><br><br><br><br><br><br>
+      
+    </ion-card-content>
+</ion-card>
+
+</ion-content>
+
+

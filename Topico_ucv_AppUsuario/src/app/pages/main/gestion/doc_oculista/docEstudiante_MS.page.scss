@@ -1,0 +1,52 @@
+app-header {
+  background: #3880ff;
+  color: white;
+}
+
+ion-tabs {
+  ion-tab-bar {
+    background: #f8f8f8;
+    ion-tab-button {
+      color: #3880ff;
+      ion-icon {
+        size: 1.2em;
+      }
+      &.tab-selected {
+        color: #4861ff;
+      }
+    }
+  }
+}
+
+ion-content {
+  ion-list {
+    ion-item {
+      margin: 8px 0;
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      ion-avatar {
+        --border-radius: 50%;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      ion-label {
+        h2 {
+          font-weight: bold;
+          color: #333;
+        }
+        p {
+          color: #666;
+        }
+      }
+      ion-icon {
+        color: #3880ff;
+        margin-right: 8px;
+      }
+    }
+  }
+}

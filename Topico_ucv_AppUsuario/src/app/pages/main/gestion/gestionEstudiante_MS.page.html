@@ -1,0 +1,68 @@
+<app-header-estudiante-ms [showMenu]="true"  title="Especialidades"></app-header-estudiante-ms>
+<ion-content [fullscreen]="true" color="#003B5C">
+
+  <div class="main-header"></div>
+
+  <ion-grid>
+    <ion-row class="ion-margin-horizontal">
+      <ion-col size="6">
+        <ion-card class="ion-text-center" routerLink="doc">
+          <ion-card-header>
+            
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label color="#003B5C">Psicólogo</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-text-center" routerLink="doc_Dentista">
+          <ion-card-header>
+            
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label color="#003B5C">Dentista</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-text-center" routerLink="doc_fisio">
+          <ion-card-header>
+            
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label color="#003B5C">Fisioterapeuta</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-text-center" routerLink="doc_oculista">
+          <ion-card-header>
+            
+          </ion-card-header>
+          <ion-card-content>
+            <ion-label color="#003B5C">Oculista</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <!-- Repite lo mismo para los otros elementos -->
+      <!-- Por cuestión de espacio, solo he incluido uno aquí -->
+    </ion-row>
+    
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label color="primary" class="ion-text-center">HORARIO DE ATENCION</ion-label>
+      </ion-list-header>
+      <ion-item lines="none" *ngFor="let item of transactions">
+        <ion-label size="large" class="ion-text-wrap">
+          <b>{{item.vendor}}</b>
+          <p>
+            {{item?.time}}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+  
+</ion-content>
