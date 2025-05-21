@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebaseConfig : {
-    apiKey: "AIzaSyCQN8hlOvJb-TSrluMxcrU1fkzwB5bhoAc",
-    authDomain: "topico-g2.firebaseapp.com",
-    projectId: "topico-g2",
-    storageBucket: "topico-g2.appspot.com",
-    messagingSenderId: "350716268839",
-    appId: "1:350716268839:web:2c0cd9bde0d36f4ef21902"
+     apiKey: "AIzaSyCZJQZBKOIKnagjrUaS35AmdaHQ6RjLAag",
+  authDomain: "ucvmedic-3ef89.firebaseapp.com",
+  projectId: "ucvmedic-3ef89",
+  storageBucket: "ucvmedic-3ef89.firebasestorage.app",
+  messagingSenderId: "184634789378",
+  appId: "1:184634789378:web:abbf599af6a4c05fb3e11b"
   }
 };
