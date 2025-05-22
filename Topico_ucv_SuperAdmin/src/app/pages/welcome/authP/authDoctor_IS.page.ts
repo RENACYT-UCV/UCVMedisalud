@@ -11,13 +11,19 @@ import { UtilsService_Image } from 'src/app/services/utils_Image.service';
   templateUrl: './authDoctor_IS.page.html',
   styleUrls: ['./authDoctor_IS.page.scss'],
 })
+
 export class AuthDoctor_ISPage implements OnInit {
+  showPassword: boolean = true;
+
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })
   firebaseSvc = inject(FirebaseService_Datos);
   utilsSvc= inject(UtilsService_Image)
+  togglePassword() {
+  this.showPassword = !this.showPassword;
+}
 
   ngOnInit() {
   }

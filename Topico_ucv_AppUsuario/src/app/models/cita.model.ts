@@ -1,19 +1,16 @@
 export interface Cita{
-        nom: string,  //name
-        sold: number, //soldUnits
-        cos: number,  //price
-        identific:string, //dni
-        fotogra: string, //image
-        ed:string, //edad
-        tim : String, //hora
-        med: string, //doctor
-        carre:string,  //facultad
-        hotm:string, //correo
-        tip:string, //tipo
-        id: string, //id
-        fec: Date, //fecha
-        di: string, //dia
-
-        
-    
+  id: string;             // Unique ID of the appointment
+  name: string;           // Nombre del estudiante
+  phone: number;          // Teléfono del estudiante
+  price: number;          // Costo de la cita
+  dni: string;            // DNI del estudiante
+  image: string;          // Foto del estudiante o evidencia
+  age: string;            // Edad del estudiante
+  time: string;           // Hora de la cita
+  doctor: string;         // Doctor asignado
+  facultad: string;       // Facultad del estudiante
+  email: string;          // Correo electrónico
+  type: string;           // Tipo de cita (ej. "Oculista")
+  date: Date;             // Fecha de la cita
+  day: string;            // Día de la semana
 }

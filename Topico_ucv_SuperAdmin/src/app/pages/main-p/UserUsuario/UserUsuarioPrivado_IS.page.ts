@@ -38,19 +38,23 @@ export class UserUsuarioPrivado_ISPage implements OnInit {
     // Utilizamos una consulta para obtener solo los usuarios con el rol de administrador
     let usersQuery = query(collection(getFirestore(), 'user'), where('role', '==', 'student'));
 
-    let sub = onSnapshot(usersQuery, async (querySnapshot) => {
-      let user = [];
-      querySnapshot.forEach(async (doc) => {
-        user.push(doc.data());
+      onSnapshot(usersQuery, (querySnapshot) => {
+    let usersList = [];
+    querySnapshot.forEach((doc) => {
+      // Combina los datos del documento con su ID
+      usersList.push({
+        ...doc.data(),
+        uid: doc.id  // Añade el ID del documento como uid
       });
-      console.log(user);
-      this.users = user;
-      this.loading = false;
-      // No es necesario desuscribirse de onSnapshot
-    }, (error) => {
-      console.error('Error al obtener los usuarios:', error);
     });
-  }
+    console.log(usersList);
+    this.users = usersList;
+    this.loading = false;
+  }, (error) => {
+    console.error('Error al obtener los usuarios:', error);
+    this.loading = false;
+  });
+}
 
   async updateUserAccountStatus(userId: string, newStatus: string) {
     const userRef = doc(collection(getFirestore(), 'user'), userId);

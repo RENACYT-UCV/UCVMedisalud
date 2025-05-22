@@ -2,14 +2,14 @@
 
 <ion-content>
   <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
-   
+
     <!-- Mostrar imagen si existe -->
-    <ion-avatar *ngIf="form.value.fotogra">
-      <img [src]="form.value.fotogra" />
+    <ion-avatar *ngIf="form.value.image">
+      <img [src]="form.value.image" />
     </ion-avatar>
-    <!-- Mostrar icono de documento si no hay imagen -->
-      
+
     <br>
+
     <!-- Botón para tomar/seleccionar una foto -->
     <ion-button (click)="takeImage()" mode="ios" size="small" shape="round">
       Tomar/Seleccionar
@@ -18,47 +18,60 @@
     <!-- Nombre -->
     <app-custom-input-estudiante-ms 
       autocomplete="name" 
-      [control]="form.controls.nom"
+      [control]="form.controls.name"
       type="text"
       label="Nombre"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- Edad -->
+    <app-custom-input-estudiante-ms 
+      [control]="form.controls.age"
+      type="number"
+      label="Edad"
     ></app-custom-input-estudiante-ms>
 
     <!-- DNI -->
     <app-custom-input-estudiante-ms 
       autocomplete="off" 
-      [control]="form.controls.identific"
+      [control]="form.controls.dni"
       type="text"
       label="DNI"
     ></app-custom-input-estudiante-ms>
 
     <!-- Teléfono -->
     <app-custom-input-estudiante-ms 
-      [control]="form.controls.sold"
+      [control]="form.controls.phone"
       type="number"
       label="Teléfono"
       (ionInput)="setNumberInputs()"
     ></app-custom-input-estudiante-ms>
 
-        <!-- Día -->
+    <!-- Día -->
     <ion-item>
       <ion-label>Día</ion-label>
-      <ion-select formControlName="di" (ionChange)="updateFechaFromDia()">
+      <ion-select formControlName="day" (ionChange)="updateFechaFromDia()">
         <ion-select-option *ngFor="let di of dias" [value]="di.valor">{{ di.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <!-- Fecha -->
     <app-custom-input-estudiante-ms 
-      [control]="form.controls.fec"
+      [control]="form.controls.date"
       type="date"
       label="Fecha"
-      (ionInput)="setNumberInputs()"
+    ></app-custom-input-estudiante-ms>
+
+    <!-- Hora -->
+    <app-custom-input-estudiante-ms 
+      [control]="form.controls.time"
+      type="time"
+      label="Hora"
     ></app-custom-input-estudiante-ms>
 
     <!-- Facultad -->
     <app-custom-input-estudiante-ms 
       autocomplete="facultad" 
-      [control]="form.controls.carre"
+      [control]="form.controls.facultad"
       type="text"
       label="Facultad"
     ></app-custom-input-estudiante-ms>
@@ -66,28 +79,19 @@
     <!-- Email -->
     <app-custom-input-estudiante-ms 
       autocomplete="email" 
-      [control]="form.controls.hotm"
-      type="text"
-      label="email"
-    ></app-custom-input-estudiante-ms>
-
-    <!-- Hora -->
-    <app-custom-input-estudiante-ms 
-      [control]="form.controls.tim"
-      type="time"
-      label="Hora"
+      [control]="form.controls.email"
+      type="email"
+      label="Correo electrónico"
     ></app-custom-input-estudiante-ms>
 
     <!-- Doctor -->
     <ion-item>
       <ion-label>Doctor</ion-label>
-      <ion-select formControlName="med">
+      <ion-select formControlName="doctor">
         <ion-select-option *ngFor="let med of doctors" [value]="med">{{med}}</ion-select-option>
       </ion-select>
     </ion-item>
 
-
-     
     <!-- Botón de enviar -->
     <ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">
       {{ cita ? 'Actualizar Cita' : 'Generar Cita' }}

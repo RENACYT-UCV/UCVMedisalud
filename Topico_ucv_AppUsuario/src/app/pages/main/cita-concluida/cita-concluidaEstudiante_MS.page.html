@@ -5,14 +5,15 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <!-- Tarjeta resumen -->
   <ion-card mode="ios" color="secondary" class="d-flex-center ion-text-center" *ngIf="!loading && citas.length">
     <div>
-      <h5>{{citas.length}}</h5>
-      <p> Citas concluidas </p>
+      <h5>{{ citas.length }}</h5>
+      <p>Citas concluidas</p>
     </div>
     <div>
       <h5>{{ getCitasHoy().length }}</h5>
-      <p> Citas para hoy </p>
+      <p>Citas para hoy</p>
     </div>
   </ion-card>
 
@@ -20,31 +21,37 @@
   <ion-list *ngIf="!loading">
     <ion-item-sliding class="cita-item" *ngFor="let p of citas">
       <ion-item>
-        <ion-avatar slot="start" *ngIf="!p.fotogra">
+        <ion-avatar slot="start" *ngIf="p.image">
+          <img [src]="p.image" />
         </ion-avatar>
-        <ion-avatar slot="start" *ngIf="p.fotogra">
-          <img [src]="p.fotogra" />
+        <ion-avatar slot="start" *ngIf="!p.image">
+          <ion-icon name="person-circle-outline" size="large"></ion-icon>
         </ion-avatar>
+
         <ion-label>
-          <div class="nom">{{ p.nom }}</div>
+          <div class="name">{{ p.name }}</div>
           <div class="data">
-            <strong>Nombre: </strong>{{p.nom}}<br>
-            <strong>DNI: </strong>{{p.identific}}<br>
-            <strong>Teléfono: </strong>{{p.sold}}<br>
-            <strong>Fecha: </strong>{{p.fec}}<br>
-            <strong>Hora: </strong>{{p.tim}}<br>
-            <strong>doctor: </strong>{{p.med}}<br>
-            <strong>Facultad: </strong>{{p.carre}}<br>
-            <strong>Correo: </strong>{{p.hotm}}<br>
-            <strong>Especialidad: </strong>{{p.tip}}
+            <strong>Nombre:</strong> {{ p.name }}<br />
+            <strong>DNI:</strong> {{ p.dni }}<br />
+            <strong>Teléfono:</strong> {{ p.phone }}<br />
+            <strong>Fecha:</strong> {{ p.date }}<br />
+            <strong>Hora:</strong> {{ p.time }}<br />
+            <strong>Doctor:</strong> {{ p.doctor }}<br />
+            <strong>Día:</strong> {{ p.day }}<br />
+            <strong>Facultad:</strong> {{ p.facultad }}<br />
+            <strong>Correo:</strong> {{ p.email }}<br />
+            <strong>Especialidad:</strong> {{ p.type }}
           </div>
         </ion-label>
-        <ion-badge [color]="citaEstadoColor(p)" slot="end">{{ citaEstado(p) }}</ion-badge>
+
+        <ion-badge [color]="citaEstadoColor(p)" slot="end">
+          {{ citaEstado(p) }}
+        </ion-badge>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
 
-  <!-- Loading -->
+  <!-- Skeleton de carga -->
   <ion-list *ngIf="loading">
     <ion-item-sliding class="cita-item" *ngFor="let placeholder of placeholders">
       <ion-item lines="full">
@@ -59,7 +66,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <!-- Sin citas concluidas -->
+  <!-- Sin citas -->
   <div *ngIf="!loading && !citas.length" class="empty">
     <h3>No hay Citas Concluidas</h3>
   </div>
