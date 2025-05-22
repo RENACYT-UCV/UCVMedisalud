@@ -15,7 +15,7 @@ export class CitaConcluidaPage implements OnInit {
 
   citas: Cita[] = [];
   loading: boolean = false;
-  placeholders: number[] = Array(7).fill(1); // Define placeholders as an array of numbers
+  placeholders: number[] = Array(7).fill(1);
 
   firebaseSvc = inject(FirebaseEDTService);
   utilsSvc = inject(UtilsEDTService);
@@ -42,7 +42,7 @@ export class CitaConcluidaPage implements OnInit {
     hoy.setHours(0, 0, 0, 0);
 
     return this.citas.filter(cita => {
-      const fechaCita = new Date(cita.fec);
+      const fechaCita = new Date(cita.date);
       fechaCita.setHours(0, 0, 0, 0);
       return fechaCita.getTime() === hoy.getTime();
     });
@@ -55,9 +55,9 @@ export class CitaConcluidaPage implements OnInit {
 
     const now = new Date();
 
-    this.firebaseSvc.getCollecitionData(path1, [orderBy('fecha', 'desc')]).subscribe((citas1: Cita[]) => {
-      this.firebaseSvc.getCollecitionData(path2, [orderBy('fecha', 'desc')]).subscribe((citas2: Cita[]) => {
-        this.citas = [...citas1, ...citas2].filter(cita => new Date(`${cita.fec}T${cita.tim}:00`) < now);
+    this.firebaseSvc.getCollecitionData(path1, [orderBy('date', 'desc')]).subscribe((citas1: Cita[]) => {
+      this.firebaseSvc.getCollecitionData(path2, [orderBy('date', 'desc')]).subscribe((citas2: Cita[]) => {
+        this.citas = [...citas1, ...citas2].filter(cita => new Date(`${cita.date}T${cita.time}:00`) < now);
         this.loading = false;
       }, (error: any) => {
         console.error(error);
@@ -70,30 +70,29 @@ export class CitaConcluidaPage implements OnInit {
   }
 
   citaEstado(cita: Cita): string {
-    const fechaCita = new Date(`${cita.fec}T${cita.tim}:00`);
+    const fechaCita = new Date(`${cita.date}T${cita.time}:00`);
     const now = new Date();
     return fechaCita < now ? 'Cita Concluida' : 'Cita Pendiente';
   }
 
   citaEstadoColor(cita: Cita): string {
-    const fechaCita = new Date(`${cita.fec}T${cita.tim}:00`);
+    const fechaCita = new Date(`${cita.date}T${cita.time}:00`);
     const now = new Date();
     return fechaCita < now ? 'danger' : 'success';
   }
 
- 
   getCitaFields(cita: Cita): { label: string, value: any }[] {
     return [
-      { label: 'Nombre', value: cita.nom },
-      { label: 'DNI', value: cita.identific },
-      { label: 'Teléfono', value: cita.sold },
-      { label: 'Fecha', value: cita.fec },
-      { label: 'Hora', value: cita.tim },
-      { label: 'Doctor', value: cita.med },
-      { label: 'Dia', value: cita.di },
-      { label: 'Facultad', value: cita.carre },
-      { label: 'Correo', value: cita.hotm },
-      { label: 'Especialidad', value: cita.tip },
+      { label: 'Nombre', value: cita.name },
+      { label: 'DNI', value: cita.dni },
+      { label: 'Teléfono', value: cita.phone },
+      { label: 'Fecha', value: cita.date },
+      { label: 'Hora', value: cita.time },
+      { label: 'Doctor', value: cita.doctor },
+      { label: 'Día', value: cita.day },
+      { label: 'Facultad', value: cita.facultad },
+      { label: 'Correo', value: cita.email },
+      { label: 'Especialidad', value: cita.type },
     ];
   }
 }

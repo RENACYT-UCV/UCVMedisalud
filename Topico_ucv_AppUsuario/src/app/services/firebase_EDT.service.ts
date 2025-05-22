@@ -37,11 +37,11 @@ export class FirebaseEDTService {
 
   //===acceder===========
   signIn(user: user_ETD) {
-    return signInWithEmailAndPassword(getAuth(), user.hotm, user.cont);
+    return signInWithEmailAndPassword(getAuth(), user.email, user.password);
   }
   //===crear usuario===========
   signUp(user: user_ETD) {
-    return createUserWithEmailAndPassword(getAuth(), user.hotm, user.cont);
+    return createUserWithEmailAndPassword(getAuth(), user.email, user.password);
   }
   //===Actualizar usuario===========
   updateUser(displayName: string) {

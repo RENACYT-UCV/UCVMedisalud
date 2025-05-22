@@ -5,6 +5,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <!-- Tarjeta de resumen -->
   <ion-card mode="ios" color="secondary" class="d-flex-center ion-text-center" *ngIf="!loading && citas.length">
     <div>
       <h5>{{ citas.length }}</h5>
@@ -16,27 +17,32 @@
     </div>
   </ion-card>
 
+  <!-- Lista de citas -->
   <ion-list *ngIf="!loading">
     <ion-item-sliding class="cita-item" *ngFor="let cita of citas">
       <ion-item>
-        <ion-avatar slot="start" *ngIf="!cita.fotogra">
+        <ion-avatar slot="start" *ngIf="cita.image">
+          <img [src]="cita.image" />
         </ion-avatar>
-        <ion-avatar slot="start" *ngIf="cita.fotogra">
-          <img [src]="cita.fotogra" />
+        <ion-avatar slot="start" *ngIf="!cita.image">
+          <ion-icon name="person-circle-outline" size="large"></ion-icon>
         </ion-avatar>
+
         <ion-label>
-          <div class="name">{{ cita.nom }}</div>
+          <div class="name">{{ cita.name }}</div>
           <div class="data">
             <ng-container *ngFor="let field of getCitaFields(cita)">
-              <strong>{{ field.label }}: </strong>{{ field.value }}<br>
+              <strong>{{ field.label }}:</strong> {{ field.value }}<br />
             </ng-container>
           </div>
         </ion-label>
+
         <ion-badge color="success" slot="end">Cita Pendiente</ion-badge>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
 
+  <!-- Skeleton de carga -->
   <ion-list *ngIf="loading">
     <ion-item-sliding class="cita-item" *ngFor="let placeholder of placeholders">
       <ion-item lines="full">
@@ -51,6 +57,7 @@
     </ion-item-sliding>
   </ion-list>
 
+  <!-- Sin citas -->
   <div *ngIf="!loading && !citas.length" class="empty">
     <h3>No hay Citas Pendientes</h3>
   </div>

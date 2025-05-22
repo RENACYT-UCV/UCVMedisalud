@@ -71,7 +71,7 @@ export class Registrarse_Doctor_LogPage implements OnInit {
 
       this.firebaseSvc.setDocument(path, this.form.value).then(async res =>{
         this.utilsSvc.saveInLocalStorage('user',this.form.value)
-        this.utilsSvc.routerLink('/main-p/home');
+        this.utilsSvc.routerLink('/welcome');
         this.form.reset();
       }).catch(error=>{
         console.log(error);
