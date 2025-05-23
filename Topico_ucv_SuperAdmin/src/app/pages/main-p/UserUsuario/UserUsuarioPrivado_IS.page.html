@@ -4,10 +4,17 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let user of users" class="user-item">
-      <ion-label>
-        <h2 class="user-name">{{ user.name }}</h2>
-        <p class="user-email">{{ user.email }}</p>
-        <h3 class="user-dni">{{ user.dni }}</h3>
+      <ion-label >
+        <div class="user-details">
+          <h2 class="user-name">{{ user.name }}</h2>
+          <div class="user-details">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>DNI:</strong> {{ user.dni }}</p>
+            <p><strong>Teléfono:</strong> {{ user.phone }}</p>
+            <p><strong>Facultad:</strong> {{ user.facultad }}</p>
+            <p><strong>Rol:</strong> {{ user.role }}</p>
+          </div>
+        </div>
       </ion-label>
       <ion-select [(ngModel)]="user.estadocuenta" (ionChange)="updateUserAccountStatus(user.uid, user.estadocuenta)" class="user-status-select">
         <!-- Utiliza un ion-select para el estado de cuenta -->
