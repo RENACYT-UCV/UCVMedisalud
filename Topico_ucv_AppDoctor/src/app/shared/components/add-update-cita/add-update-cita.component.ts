@@ -19,21 +19,20 @@ export class AddUpdateCitaComponent implements OnInit {
   form = new FormGroup({
       id: new FormControl(''),
       image: new FormControl(''),
-      name: new FormControl(''),
-      dni: new FormControl(''),
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      dni: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
       price: new FormControl(null),
-      fecha: new FormControl(null),
-      hora: new FormControl(null),
-      doctor: new FormControl(null),
-      facultad: new FormControl(null),
-      tipo:new FormControl('Psicología'),
-      soldUnits: new FormControl(null),
-      email: new FormControl(null),
-      
+      fecha: new FormControl(null, [Validators.required, this.validateDate]),
+      hora: new FormControl(null, Validators.required),
+      doctor: new FormControl(null, Validators.required),
+      facultad: new FormControl(null, Validators.required),
+      tipo: new FormControl('Psicología'),
+      soldUnits: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email])
     });
 
   user = {} as user;
-  doctors: string[] = ['Dr.Ivan Gutierrez', 'Dra.María García'];
+  doctors: string[] = [];
 
   constructor(
     private firebaseSvc: FirebaseService,
@@ -42,20 +41,23 @@ export class AddUpdateCitaComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
+    await this.cargarDoctoresDisponibles();
+    
     if (this.cita) {
       this.form.setValue(this.cita);
     } else {
-      // Si no hay una cita existente, establece los valores del formulario con los datos del usuario
-      this.form.controls.name.setValue(this.user.name);
-      this.form.controls.dni.setValue(this.user.dni);
-      this.form.controls.soldUnits.setValue(this.user.phone);
-      this.form.controls.facultad.setValue(this.user.facultad);
-      this.form.controls.email.setValue(this.user.email);
-
-      // Añade los controles restantes si corresponden a los datos del usuario
+      this.setUserDetails();
     }
+
+    // Obtener el doctor seleccionado de los parámetros de la ruta
+    this.route.paramMap.subscribe(params => {
+      const selectedDoctor = params.get('doctor');
+      if (selectedDoctor) {
+        this.form.controls.doctor.setValue(selectedDoctor);
+      }
+    });
 
     this.route.paramMap.subscribe(params => {
       const selectedHour = params.get('hora');
@@ -63,6 +65,44 @@ export class AddUpdateCitaComponent implements OnInit {
         this.form.controls.hora.setValue(selectedHour);
       }
     });
+  }
+
+  async cargarDoctoresDisponibles() {
+    try {
+      // Obtener el doctor de los parámetros de la ruta
+      const doctor = this.route.snapshot.paramMap.get('doctor');
+      
+      if (doctor) {
+        // Si hay un doctor en los parámetros, usarlo
+        this.doctors = [doctor];
+      } else {
+        // Si no hay doctor en los parámetros, mostrar mensaje de error
+        this.utilsSvc.presentToast({
+          message: 'No se pudo cargar el doctor seleccionado',
+          duration: 2500,
+          color: '#003B5C',
+          position: 'middle',
+          icon: 'alert-circle-outline'
+        });
+      }
+    } catch (error) {
+      console.error('Error al cargar doctores:', error);
+      this.utilsSvc.presentToast({
+        message: 'Error al cargar los doctores disponibles',
+        duration: 2500,
+        color: '#003B5C',
+        position: 'middle',
+        icon: 'alert-circle-outline'
+      });
+    }
+  }
+
+  setUserDetails() {
+    this.form.controls.name.setValue(this.user.name);
+    this.form.controls.dni.setValue(this.user.dni);
+    this.form.controls.soldUnits.setValue(this.user.phone);
+    this.form.controls.facultad.setValue(this.user.facultad);
+    this.form.controls.email.setValue(this.user.email);
   }
 
   async takeImage() {

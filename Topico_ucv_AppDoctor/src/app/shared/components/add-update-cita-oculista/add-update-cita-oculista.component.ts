@@ -24,7 +24,7 @@ export class AddUpdateCitaOculistaComponent implements OnInit {
     fecha: new FormControl(null),
     hora: new FormControl(null),
     doctor: new FormControl(null),
-    tipo:new FormControl('Oculista'),
+    tipo:new FormControl('Oftalmologia'),
     facultad: new FormControl(null),
     soldUnits: new FormControl(null),
   });
@@ -79,7 +79,7 @@ export class AddUpdateCitaOculistaComponent implements OnInit {
   }
 
   async createCita() {
-    let path = `Estudiantes/${this.user.uid}/cita_oculista`;
+    let path = `Estudiantes/${this.user.uid}/cita_oftalmologia`;
 
     const loading = await this.utilsSvc.loading();
     await loading.present();
@@ -119,7 +119,7 @@ export class AddUpdateCitaOculistaComponent implements OnInit {
   }
 
   async updateProduct() {
-    let path = `Estudiante/${this.user.uid}/cita_oculista/${this.cita.id}`;
+    let path = `Estudiante/${this.user.uid}/cita_oftalmologia/${this.cita.id}`;
 
     const loading = await this.utilsSvc.loading();
     await loading.present();

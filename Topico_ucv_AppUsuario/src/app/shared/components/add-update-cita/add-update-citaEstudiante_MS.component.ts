@@ -6,6 +6,7 @@ import { UtilsEDTService } from 'src/app/services/utils_EDT.service';
 import { Cita } from 'src/app/models/cita.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment-timezone';
+import { where } from 'firebase/firestore';
 
 @Component({
   selector: 'app-add-update-cita-estudiante-ms',
@@ -26,14 +27,69 @@ export class AddUpdateCitaEstudianteMSComponent implements OnInit {
     doctor: new FormControl(null, Validators.required),
     day: new FormControl(null, Validators.required),
     facultad: new FormControl(null, Validators.required),
-    type: new FormControl('Oculista'),
+    type: new FormControl('Psicologia'),
     phone: new FormControl(null, Validators.required),
     email: new FormControl(null, [Validators.required, Validators.email]),
     age: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{2}$')])
   });
 
   user = {} as user_ETD;
-  doctors: string[] = ['Dr. Ivan Gutierrez', 'Dra. María García'];
+  doctors: string[] = [];
+
+  cargarDoctoresDisponibles() {
+    try {
+      // Obtener doctores desde Firestore según la especialidad
+      this.firebaseSvc.getCollecitionData('user', [
+        where('role', '==', 'admin'),
+        where('especialidad', '==', 'Psicologia')
+      ]).subscribe(doctoresRef => {
+        if (Array.isArray(doctoresRef)) {
+          this.doctors = doctoresRef.map(doc => doc['name']);
+          
+          if (this.doctors.length === 0) {
+            console.warn('No hay doctores disponibles para esta especialidad');
+            this.utilsSvc.presentToast({
+              message: 'No hay doctores disponibles para esta especialidad.',
+              duration: 3000,
+              color: 'warning',
+              position: 'middle'
+            });
+          } else {
+            // Obtener el doctor seleccionado de los parámetros de la ruta
+            const selectedDoctor = this.route.snapshot.paramMap.get('doctor');
+            if (selectedDoctor && this.doctors.includes(selectedDoctor)) {
+              this.form.controls.doctor.setValue(selectedDoctor);
+            } else {
+              // Si no hay doctor seleccionado o no está en la lista, seleccionar el primero
+              this.form.controls.doctor.setValue(this.doctors[0]);
+            }
+          }
+        } else {
+          throw new Error('Error al obtener datos de doctores');
+        }
+      }, error => {
+        console.error('Error al cargar doctores:', error);
+        this.utilsSvc.presentToast({
+          message: 'Error al cargar la lista de doctores. Por favor, inténtelo de nuevo más tarde.',
+          duration: 3000,
+          color: 'danger',
+          position: 'middle'
+        });
+        this.doctors = [];
+      });
+    } catch (error) {
+      console.error('Error al iniciar carga de doctores:', error);
+      this.utilsSvc.presentToast({
+        message: 'Error al cargar la lista de doctores. Por favor, inténtelo de nuevo más tarde.',
+        duration: 3000,
+        color: 'danger',
+        position: 'middle'
+      });
+      this.doctors = [];
+    }
+  }
+
+
   dias: { nombre: string, valor: string }[] = [
     { nombre: 'Lunes', valor: 'Lunes' },
     { nombre: 'Martes', valor: 'Martes' },
@@ -52,6 +108,9 @@ export class AddUpdateCitaEstudianteMSComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
+    
+    // Cargar lista de doctores disponibles
+    this.cargarDoctoresDisponibles();
 
     if (this.cita) {
       this.form.setValue(this.cita);
@@ -78,6 +137,13 @@ export class AddUpdateCitaEstudianteMSComponent implements OnInit {
     this.form.controls.phone.setValue(this.user.phone);
     this.form.controls.facultad.setValue(this.user.facultad);
     this.form.controls.email.setValue(this.user.email);
+    
+    // Autocompletar edad si está disponible en el usuario
+    if (this.user.edad) {
+      this.form.controls.age.setValue(this.user.edad);
+    }
+
+
   }
 
   async takeImage() {
@@ -106,7 +172,7 @@ export class AddUpdateCitaEstudianteMSComponent implements OnInit {
   }
 
   async createCita() {
-    const path = `Estudiantes/${this.user.uid}/cita`;
+    const path = `Estudiantes/${this.user.uid}/citas/${this.form.value.type.toLowerCase()}`;
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
@@ -130,7 +196,7 @@ export class AddUpdateCitaEstudianteMSComponent implements OnInit {
   }
 
   async updateCita() {
-    const path = `Estudiantes/${this.user.uid}/cita_psicologo/${this.cita.id}`;
+    const path = `Estudiantes/${this.user.uid}/citas/${this.form.value.type.toLowerCase()}/${this.cita.id}`;
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
