@@ -84,11 +84,11 @@
       label="Correo electrónico"
     ></app-custom-input-estudiante-ms>
 
-    <!-- Doctor -->
+    <!-- Doctor (Campo de solo lectura) -->
     <ion-item>
       <ion-label>Doctor</ion-label>
       <ion-select formControlName="doctor">
-        <ion-select-option *ngFor="let med of doctors" [value]="med">{{med}}</ion-select-option>
+        <ion-select-option *ngFor="let doctor of doctors" [value]="doctor">{{ doctor }}</ion-select-option>
       </ion-select>
     </ion-item>
 
