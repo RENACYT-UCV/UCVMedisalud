@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
-  { path: '', redirectTo: 'welcome/auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'welcome/captcha', pathMatch: 'full' },
 
   {
     path: 'auth',

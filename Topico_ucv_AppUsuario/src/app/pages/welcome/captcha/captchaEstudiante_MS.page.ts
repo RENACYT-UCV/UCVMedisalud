@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router'; // Importa el enrutador
+import { UtilsEDTService } from 'src/app/services/utils_EDT.service';
 
 @Component({
   selector: 'app-captcha',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router'; // Importa el enrutador
 export class CaptchaPage implements OnInit {
   randomValue: string = '';
   randomValueEntered: string = '';
+  utilsSvc = inject(UtilsEDTService);
 
   constructor(private router: Router) {} // Inyecta el enrutador
 
@@ -33,8 +35,14 @@ export class CaptchaPage implements OnInit {
     if (this.randomValue !== this.randomValueEntered) {
       this.randomValueEntered = '';
       this.randomValue = this.generateRandomValue();
-      // Mostrar mensaje de error
-      alert('Ocurrió un error inesperado. Por favor, inténtalo de nuevo.');
+      
+      this.utilsSvc.presentToast({
+        message: "El código ingresado no coincide. Por favor, inténtalo de nuevo.",
+        duration: 2500,
+        color: 'danger',
+        position: 'middle',
+        icon: 'alert-circle-outline'
+      });
     } else {
       // Redirige al usuario a otra página (por ejemplo, 'dashboard')
       this.router.navigate(['/auth']); // Ajusta la ruta según tu estructura de rutas
