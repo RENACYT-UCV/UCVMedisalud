@@ -87,9 +87,7 @@
     <!-- Doctor -->
     <ion-item>
       <ion-label>Doctor</ion-label>
-      <ion-select formControlName="doctor">
-        <ion-select-option *ngFor="let med of doctors" [value]="med">{{ med }}</ion-select-option>
-      </ion-select>
+      <ion-label>{{ doctorSeleccionado }}</ion-label>
     </ion-item>
 
     <!-- Botón de enviar -->

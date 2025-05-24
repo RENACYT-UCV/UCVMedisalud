@@ -85,12 +85,10 @@
     ></app-custom-input-estudiante-ms>
 
     <!-- Doctor -->
-    <ion-item>
+  <ion-item>
       <ion-label>Doctor</ion-label>
-      <ion-select formControlName="doctor">
-        <ion-select-option *ngFor="let med of doctors" [value]="med">{{med}}</ion-select-option>
-      </ion-select>
-    </ion-item>
+      <ion-label>{{ doctorSeleccionado }}</ion-label>
+  </ion-item>
 
     <!-- Botón de enviar -->
     <ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid">

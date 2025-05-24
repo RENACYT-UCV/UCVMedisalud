@@ -6,6 +6,8 @@ import { UtilsEDTService } from 'src/app/services/utils_EDT.service';
 import { Cita } from 'src/app/models/cita.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment-timezone';
+import { DoctorService } from 'src/app/services/doctor_services';
+
 
 @Component({
   selector: 'app-add-update-cita-fisioterapeuta-estudiante-ms',
@@ -43,17 +45,23 @@ export class AddUpdateCitaFisioterapiaEstudianteMSComponent implements OnInit {
     { nombre: 'Viernes', valor: 'Viernes' },
     { nombre: 'Sábado', valor: 'Sábado' },
   ];
+doctorSeleccionado: string;
+
 
   constructor(
     private firebaseSvc: FirebaseEDTService,
     private utilsSvc: UtilsEDTService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private doctorService: DoctorService
+
+
   ) {}
 
   ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
-
+this.doctorSeleccionado = this.doctorService.getDoctorSeleccionado('fisioterapia') || '';
+    this.form.controls.doctor.setValue(this.doctorSeleccionado); // También lo carga al FormGroup
     if (this.cita) {
       this.form.setValue(this.cita);
     } else {
