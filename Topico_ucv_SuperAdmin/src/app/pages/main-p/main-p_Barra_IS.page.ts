@@ -14,8 +14,8 @@ import { UtilsService_Image } from 'src/app/services/utils_Image.service';
 export class MainP_Barra_ISPage implements OnInit {
 
   pages =[
-    {title:'Administracion-Doctores',url:'/main-p/UserDoctor',icon:'medical-outline'},
-    {title:'Administracion-Usuarios',url:'/main-p/UserUsuario',icon:'medical-outline'},
+    { title: 'Administrar Doctores', url: '/main-p/UserDoctor', icon: 'medical-outline' },
+    { title: 'Administrar Estudiantes', url: '/main-p/UserUsuario', icon: 'medical-outline' },
     {title:'Reporte General de citas',url:'/main-p/reportes',icon:'medical-outline'},
 
 ]

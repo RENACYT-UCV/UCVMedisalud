@@ -16,9 +16,10 @@ export class HeaderEstudianteMSComponent  implements OnInit {
 
  utilSvc = inject(UtilsEDTService);
 
-  
+
 
   ngOnInit() {}
+
 
   dismissModal(){
     this.utilSvc.dismissModal();

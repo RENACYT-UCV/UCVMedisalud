@@ -15,9 +15,9 @@
                     <h2>{{ citasDentista.length }}</h2>
                     <p>Citas de dentista</p>
                 </ion-col>
-                
+
                 <ion-col size="6" class="ion-text-center">
-       
+
                     <h2>{{ citasOculista.length }}</h2>
                     <p>Citas de oculista</p>
                 </ion-col>
@@ -28,14 +28,14 @@
             </ion-row>
         </ion-grid>
     </ion-card>
-    
+
 
     <!-- Primera lista -->
     <ion-list *ngIf="!loading">
         <ion-item-sliding class="cita-item" *ngFor="let p of citas">
             <ion-item>
                 <ion-avatar slot="start" *ngIf="!p.image">
-         
+
                 </ion-avatar>
                 <ion-avatar slot="start" *ngIf="p.image">
                     <img [src]="p.image" />
@@ -46,7 +46,7 @@
                         <strong>Nombre: </strong>{{p.name}}<br>
                         <strong>DNI: </strong>{{p.dni}}<br>
                         <strong>Teléfono: </strong>{{p.soldUnits}}<br>
-                        <strong>Fecha: </strong>{{p.fecha}}<br>
+                        <strong>Fecha: </strong>{{p.date}}<br>
                         <strong>Hora: </strong>{{p.hora}}<br>
                         <strong>doctor: </strong>{{p.doctor}}<br>
                         <strong>facultad: </strong>{{p.facultad}}<br>
@@ -64,7 +64,7 @@
         <ion-item-sliding class="cita-item" *ngFor="let p of citasDentista">
             <ion-item>
                 <ion-avatar slot="start" *ngIf="!p.image">
-           
+
                 </ion-avatar>
                 <ion-avatar slot="start" *ngIf="p.image">
                     <img [src]="p.image" />
@@ -75,7 +75,7 @@
                         <strong>Nombre: </strong>{{p.name}}<br>
                         <strong>DNI: </strong>{{p.dni}}<br>
                         <strong>Teléfono: </strong>{{p.soldUnits}}<br>
-                        <strong>Fecha: </strong>{{p.fecha}}<br>
+                        <strong>Fecha: </strong>{{p.date}}<br>
                         <strong>Hora: </strong>{{p.hora}}<br>
                         <strong>doctor: </strong>{{p.doctor}}<br>
                         <strong>facultad: </strong>{{p.facultad}}<br>
@@ -92,7 +92,7 @@
             <ion-item-sliding class="cita-item" *ngFor="let p of citasOculista">
                 <ion-item>
                     <ion-avatar slot="start" *ngIf="!p.image">
-                    
+
                     </ion-avatar>
                     <ion-avatar slot="start" *ngIf="p.image">
                         <img [src]="p.image" />
@@ -103,7 +103,7 @@
                             <strong>Nombre: </strong>{{p.name}}<br>
                             <strong>DNI: </strong>{{p.dni}}<br>
                             <strong>Teléfono: </strong>{{p.soldUnits}}<br>
-                            <strong>Fecha: </strong>{{p.fecha}}<br>
+                            <strong>Fecha: </strong>{{p.date}}<br>
                             <strong>Hora: </strong>{{p.hora}}<br>
                             <strong>doctor: </strong>{{p.doctor}}<br>
                             <strong>facultad: </strong>{{p.facultad}}<br>
@@ -121,7 +121,7 @@
                     <ion-item-sliding class="cita-item" *ngFor="let p of citasFisioterapia">
                         <ion-item>
                             <ion-avatar slot="start" *ngIf="!p.image">
-                           
+
                             </ion-avatar>
                             <ion-avatar slot="start" *ngIf="p.image">
                                 <img [src]="p.image" />
@@ -132,7 +132,7 @@
                                     <strong>Nombre: </strong>{{p.name}}<br>
                                     <strong>DNI: </strong>{{p.dni}}<br>
                                     <strong>Teléfono: </strong>{{p.soldUnits}}<br>
-                                    <strong>Fecha: </strong>{{p.fecha}}<br>
+                                    <strong>Fecha: </strong>{{p.date}}<br>
                                     <strong>Hora: </strong>{{p.hora}}<br>
                                     <strong>doctor: </strong>{{p.doctor}}<br>
                                     <strong>facultad: </strong>{{p.facultad}}<br>
