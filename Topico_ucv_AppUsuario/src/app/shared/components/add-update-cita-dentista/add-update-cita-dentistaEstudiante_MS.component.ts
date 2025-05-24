@@ -203,7 +203,7 @@ export class AddUpdateCitaDentistaEstudianteMSComponent implements OnInit {
   }
 
   async updateCita() {
-    const path = `Estudiantes/${this.user.uid}/cita_odontologia/${this.cita.id}`;
+    const path = `Estudiantes/${this.user.uid}/cita/${this.cita.id}`;
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
@@ -217,7 +217,7 @@ export class AddUpdateCitaDentistaEstudianteMSComponent implements OnInit {
       await this.firebaseSvc.updateDocument(path, this.form.value);
       this.utilsSvc.dismissModal({ success: true });
       this.presentToast('Cita actualizada exitosamente', 'success');
-      this.router.navigate(['/ruta-deseada']);
+      this.router.navigate(['/main/gestion']);
     } catch (error) {
       console.error('Error actualizando cita', error);
       this.presentToast(error.message, 'danger');
