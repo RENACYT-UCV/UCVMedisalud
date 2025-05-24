@@ -1,23 +1,58 @@
-<ion-content [fullscreen]="true" class="content-background">
-  <div class="container">
-    <p class="welcome-text">Aqui se puede Poner un Logo</p>
-    <div class="logo-container">
-      <p class="welcome-text">¡TOPICO DOCTOR!</p>
-      <p class="university-text">Universidad "SIN NOMBRE"</p>
-    </div>
-  </div>
 
-  <div class="button-container">
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-      <ion-button color="danger" routerLink="authP" class="rectangular-button doctor-button">
+<ion-content class="content-background">
+  <div class="form-container">
+    <img class="logo-img" src="../assets/icon/logoDoctor.svg" alt="">
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit">
+   
 
-        Iniciar Sesion 
+      <!--=============== Email ===================-->
+      <app-custom-input 
+        autocomplete="email" 
+        [control]="form.controls.email"
+        type="email"
+        label="Correo"
+        class="input-field"
+      ></app-custom-input>
+
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div *ngIf="form.controls.email.errors?.['required']">El correo es requerido</div>
+        <div *ngIf="form.controls.email.errors?.['email']">Ingrese un correo válido</div>
+      </div>
+      <!--=============== Email ===================-->
+
+      <app-custom-input 
+        [control]="form.controls.password"
+    
+        label="Contraseña"
+        class="input-field"
+      ></app-custom-input>
+
+      <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div *ngIf="form.controls.password.errors?.['required']">La contraseña es requerida</div>
+      </div>
+
+      <!-- Remember Me Checkbox -->
+      <div class="remember-me-container">
+        <ion-checkbox slot="start" formControlName="rememberMe"></ion-checkbox>
+        <ion-label class="remember-me-label">Recordar</ion-label>
+      </div>
+
+      
+
+      <!-- Botones -->
+      <ion-button expand="block" mode="ios" class="submit-button elegant-button" type="submit" [disabled]="form.invalid">
+        Ingresar
+        
       </ion-button>
 
-      <ion-button color="danger" routerLink="sign-up" class="rectangular-button doctor-button">
-
-        Registrarse
+      <ion-button expand="block" mode="ios" routerLink="/welcome" class="submit-button elegant-button" >
+        Regresar
+        
       </ion-button>
-    </ion-fab>
+     
+    </form>
+    <p routerLink="forgot-password" class="forgot-password-link">¡Olvidaste tu contraseña?</p>
+     <br><br><br><br>   
   </div>
+ 
 </ion-content>

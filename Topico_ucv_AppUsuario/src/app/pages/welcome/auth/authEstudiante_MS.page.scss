@@ -41,7 +41,7 @@
 
   /* Global styles */
 .content-background {
-  --background: #f0f0f5; /* Color de fondo de contenido */
+  --background: transparent; /* Color de fondo de contenido */
   padding: 20px;
 }
 
@@ -51,16 +51,14 @@
   align-items: center;
   height: 100%;
   flex-direction: column;
-  background: #fff;
+  background: #ffffff;
 }
 
 .auth-form {
   width: 100%;
   padding: 20px;
   max-width: 400px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  background: #ffffff;
 }
 
 .input-field {
@@ -76,14 +74,19 @@
   display: block;
   text-align: right;
   margin-bottom: 20px;
-  color: #004e92;
+  color: #383838;
   text-decoration: underline;
 }
 
+.forgot-password-link:hover {
+  color: #727272;
+}
+
 .submit-button {
-  --background: linear-gradient(135deg, #72c6ef, #004e92);
-  --color: white;
-  margin-bottom: 10px;
+
+  --color: #ffffff;
+
+  padding:0px 12px 0px 12px ;
   transition: transform 0.3s ease; /* Animación de transformación */
 }
 
@@ -92,9 +95,11 @@
 }
 
 .register-button {
-  --background: linear-gradient(135deg, #6beeff, #052f4b);
-  --color: white;
+
+  --color: #ffffff;
   transition: transform 0.3s ease; /* Animación de transformación */
+
+  padding:0px 12px 0px 12px ;
 }
 
 .register-button:hover {
@@ -128,4 +133,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+ion-button{
+--background: #fdab28;
+    --background-activated: #b1781c;
+    --background-focused: #fdab28;
+    --background-hover: #ffc261;
+    --border-radius: 10px;
+ 
+  
 }
