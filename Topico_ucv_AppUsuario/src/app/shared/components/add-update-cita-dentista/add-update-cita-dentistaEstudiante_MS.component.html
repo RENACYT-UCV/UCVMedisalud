@@ -94,11 +94,10 @@
     ></app-custom-input-estudiante-ms>
 
     <!-- Doctor (Campo de solo lectura) -->
-    <ion-item>
-      <ion-label>Doctor</ion-label>
-      <ion-input readonly="true" [value]="form.controls.doctor.value"></ion-input>
-    </ion-item>
-
+   <ion-item lines="none">
+  <ion-label position="stacked">Doctor</ion-label>
+  <ion-input readonly="true" [value]="form.controls.doctor.value"></ion-input>
+</ion-item>
     <!-- Botón de enviar -->
     <ion-button
       mode="ios"

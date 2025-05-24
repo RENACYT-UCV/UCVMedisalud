@@ -7,6 +7,8 @@ import { Cita } from 'src/app/models/cita.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { where } from 'firebase/firestore';
+import { DoctorService } from 'src/app/services/doctor_service';
+
 
 @Component({
   selector: 'app-add-update-cita-dentista-estudiante-ms',
@@ -44,20 +46,26 @@ export class AddUpdateCitaDentistaEstudianteMSComponent implements OnInit {
     { nombre: 'Viernes', valor: 'Viernes' },
     { nombre: 'Sábado', valor: 'Sábado' },
   ];
+doctorSeleccionado: string;
 
   constructor(
     private firebaseSvc: FirebaseEDTService,
     private utilsSvc: UtilsEDTService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+        private doctorService: DoctorService,
+    
   ) {}
 
   ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
     
     // Cargar lista de doctores disponibles
-    this.cargarDoctoresDisponibles();
-
+ const doctor = this.doctorService.getDoctorSeleccionado();
+  if (doctor) {
+    this.doctorSeleccionado = doctor.name;
+    this.form.controls.doctor.setValue(this.doctorSeleccionado);
+  }
     if (this.cita) {
       this.form.setValue(this.cita);
     } else {

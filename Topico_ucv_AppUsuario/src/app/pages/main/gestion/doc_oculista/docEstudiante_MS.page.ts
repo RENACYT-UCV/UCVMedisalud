@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FirebaseEDTService } from 'src/app/services/firebase_EDT.service';
 import { Router } from '@angular/router';
 import { where } from 'firebase/firestore';
+import { DoctorService } from 'src/app/services/doctor_service';
 
 @Component({
   selector: 'app-doc-oculista',
@@ -13,11 +14,13 @@ export class DocPage implements OnInit {
   // Inyectar el servicio de Firebase
   firebaseSvc = inject(FirebaseEDTService);
   router = inject(Router);
+    doctores: any[] = [];
+
   
   // Array para almacenar los doctores
-  doctores: any[] = [];
   
-  constructor() { }
+  constructor(private doctorService: DoctorService) {}
+
 
   ngOnInit() {
     // Cargar doctores al inicializar
@@ -41,6 +44,7 @@ export class DocPage implements OnInit {
 
   // Método para navegar a la página de horarios con el ID del doctor
   irAHorario(doctor: any) {
+        this.doctorService.setDoctorSeleccionado(doctor);
     this.router.navigate(['main/gestion/doc_oculista/horario'], {
       queryParams: { doctorId: doctor.id, doctorNombre: doctor.name }
     });
