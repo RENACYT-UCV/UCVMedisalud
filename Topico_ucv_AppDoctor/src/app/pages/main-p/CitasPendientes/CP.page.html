@@ -6,7 +6,7 @@
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-  
+
     <ion-card class="d-flex-center ion-text-center custom-card" *ngIf="!loading && citas.length">
       <ion-grid>
         <ion-row>
@@ -18,7 +18,7 @@
         </ion-row>
       </ion-grid>
     </ion-card>
-  
+
     <!-- Lista de citas pendientes -->
     <ion-list *ngIf="!loading">
       <ion-item-sliding class="cita-item" *ngFor="let p of getCitasPendientes()">
@@ -41,16 +41,15 @@
             <strong>Facultad: </strong>{{ p.facultad }}<br>
             <strong>Correo: </strong>{{ p.email }}<br>
             <strong>Especialidad: </strong>{{ p.type }}<br>
-              <strong>Estado: </strong>{{p.estado}}
             </div>
           </ion-label>
-          <ion-badge [color]="citaEstadoColor(p)" slot="end">{{ citaEstado(p) }}</ion-badge>      
+          <ion-badge [color]="citaEstadoColor(p)" slot="end">{{ citaEstado(p) }}</ion-badge>
         </ion-item>
-  
-    
+
+
       </ion-item-sliding>
     </ion-list>
-  
+
     <!-- Loading -->
     <ion-list *ngIf="loading">
       <ion-item-sliding class="cita-item" *ngFor="let p of [1, 1, 1, 1, 1, 1, 1]">
@@ -71,10 +70,9 @@
     <h3>Generar Reporte Citas Pendientes</h3>
     </ion-button>
 
-    
+
     <!-- Mensaje si no hay citas pendientes -->
     <div *ngIf="!loading && !citas.length" class="empty">
       <h3>No hay Citas Pendientes</h3>
     </div>
   </ion-content>
-  
