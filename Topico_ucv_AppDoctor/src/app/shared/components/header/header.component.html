@@ -1,27 +1,21 @@
-ion-header {
-    ion-toolbar {
-      background-color: #a22b27; /* Color de fondo azul oscuro de la Universidad César Vallejo */
-      border-bottom: 1px solid #050505; /* Borde blanco */
-  
-      ion-buttons {
-        ion-back-button, ion-button, ion-menu-button {
-        color: #FFFFFF; /* Color blanco para el título */  
-        }
-      }
-  
-      ion-title {
-        color: #FFFFFF; /* Color blanco para el título */
-  
-        strong {
-          font-size: 20px;
-          font-weight: bold;
-        }
-  
-        .admin {
-          font-size: 14px;
-          color: #fffcfc; /* Color blanco para el texto "ADMIN" */
-        }
-      }
-    }
-  }
-  
+<ion-header class="class=ion-no-border">
+  <ion-toolbar color="#FF0000" >
+
+   <ion-buttons slot="start">
+    <!-- backbutton-->
+    <ion-back-button *ngIf="backButton" [defaultHref]="backButton"></ion-back-button>
+  <!-- dissmodal-->
+<ion-button (click)="dismissModal()" *ngIf="isModal">
+
+</ion-button>
+
+    <ion-menu-button *ngIf="showMenu" menu="menu-content"></ion-menu-button>
+
+</ion-buttons>
+
+    <ion-title>
+      <strong>{{title}}</strong>
+      <div class="admin">Doctor</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

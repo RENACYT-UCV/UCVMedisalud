@@ -1,20 +1,9 @@
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: linear-gradient(to bottom, #a1e3f7, #f5f5f5);
-
-}
-
-.logo-Usuario{
- 
-  max-width: 300px;       // Límite máximo para pantallas grandes
-  display: block;
-  margin-top: -80px;   
-  margin-left: 10px;   // Ajusta según lo que quieras moverla
 }
 
 .logo-container {
@@ -29,17 +18,17 @@
 }
 
 .welcome-text {
-   font-family: 'Poppins', sans-serif;
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: bold;
   color: #000000;
-  margin-bottom: 20px;
-   display: block
+  font-style: italic;
 }
 
 .university-text {
   font-size: 18px;
   color: #3f4042;
-  }
+  font-style: oblique;
+}
 
 .button-container {
   position: absolute;
@@ -68,7 +57,9 @@
   margin-top: 20px;
 }
 
-
+.content-background {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
 
 .animated-logo {
   animation: bounce 2s infinite;
@@ -96,7 +87,6 @@
   font-size: 16px; /* Aumentar el tamaño del texto */
   --ion-icon-size: 20px; /* Aumentar el tamaño del icono */
   transition: transform 0.3s ease; /* Animación de transición */
-  
 }
 
 .rectangular-button:hover {
@@ -109,7 +99,7 @@
 }
 
 .student-button {
-  --background: #2cb9c7; /* Fondo */
+  --background: linear-gradient(135deg, #f6d365, #fda085); /* Fondo degradado */
   --color: white;
 }
 
@@ -117,6 +107,4 @@
 ion-icon {
   font-size: 20px;
   margin-right: 8px; /* Espaciado entre el icono y el texto */
-
 }
-

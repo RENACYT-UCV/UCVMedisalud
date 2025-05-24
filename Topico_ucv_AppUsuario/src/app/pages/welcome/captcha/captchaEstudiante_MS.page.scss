@@ -11,7 +11,8 @@
   
   .captcha-display {
     font-style: italic;
-    background-color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: silver;
     padding: 1rem;
     border-radius: 10px;
     font-size: 2rem;
@@ -19,10 +20,10 @@
   }
   
   ion-button {
-    --background: #fdab28;
-    --background-activated: #ffc15d;
-    --background-focused: #fad8a1;
-    --background-hover: #ffe9c5;
+    --background: #3880ff;
+    --background-activated: #3dc2ff;
+    --background-focused: #3dc2ff;
+    --background-hover: #3dc2ff;
     --border-radius: 10px;
   }
   
@@ -30,17 +31,7 @@
     --padding-start: 1rem;
     --padding-end: 1rem;
     --placeholder-color: #888;
-
+    --placeholder-font-style: italic;
     --placeholder-font-weight: bold;
   }
   
-  ion-toolbar{
-  --background: #2cb9c7;
-
-  }
-
-  ion-title{
-      --color: #fcffff;
-
-
-  }
