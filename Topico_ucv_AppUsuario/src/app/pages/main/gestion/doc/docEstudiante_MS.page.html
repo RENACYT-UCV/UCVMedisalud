@@ -3,6 +3,7 @@
 
     <ion-content>
       <ion-list>
+
         <!-- Mostrar mensaje si no hay doctores -->
         <ion-item *ngIf="doctores.length === 0" lines="none">
           <ion-label class="ion-text-center">
@@ -12,6 +13,7 @@
 
         <!-- Mostrar doctores dinámicamente desde Firestore -->
         <ion-item *ngFor="let doctor of doctores" button detail (click)="irAHorario(doctor)" lines="none">
+          
           <ion-label>
             <h2>{{doctor.name}}</h2>
             <p>Especialista en {{doctor.especialidad}}</p>

@@ -2,6 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FirebaseEDTService } from 'src/app/services/firebase_EDT.service';
 import { Router } from '@angular/router';
 import { where } from 'firebase/firestore';
+import { DoctorService } from 'src/app/services/doctor_service';
+
+
+
 
 @Component({
   selector: 'app-doc-psicologia',
@@ -17,8 +21,7 @@ export class DocPage implements OnInit {
   // Array para almacenar los doctores
   doctores: any[] = [];
   
-  constructor() { }
-
+  constructor(private doctorService: DoctorService) {}
   ngOnInit() {
     // Cargar doctores al inicializar
     this.getDoctores();
@@ -38,9 +41,15 @@ export class DocPage implements OnInit {
       this.doctores = data;
     });
   }
+doctor: any[] = [];
 
+seleccionarDoctor(nombre: string) {
+  console.log('Doctor seleccionado:', nombre);
+  // Aquí puedes hacer algo con el nombre: guardarlo, navegar, etc.
+}
   // Método para navegar a la página de horarios con el ID del doctor
   irAHorario(doctor: any) {
+      this.doctorService.setDoctorSeleccionado(doctor);
     this.router.navigate(['main/gestion/doc/horario'], {
       queryParams: { doctorId: doctor.id, doctorNombre: doctor.name }
     });
