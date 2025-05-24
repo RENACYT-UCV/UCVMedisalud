@@ -107,18 +107,17 @@ doctorSeleccionado: string;
     private utilsSvc: UtilsEDTService,
     private route: ActivatedRoute,
     private router: Router,
-        private doctorService: DoctorService
+    private doctorService: DoctorService
   ) {}
 
   ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
     
-    // Cargar lista de doctores disponibles
- const doctor = this.doctorService.getDoctorSeleccionado();
+const doctor = this.doctorService.getDoctorSeleccionado();
   if (doctor) {
     this.doctorSeleccionado = doctor.name;
     this.form.controls.doctor.setValue(this.doctorSeleccionado);
-  }
+  } 
 
     if (this.cita) {
       this.form.setValue(this.cita);

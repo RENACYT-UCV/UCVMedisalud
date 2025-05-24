@@ -48,12 +48,13 @@ export class AddUpdateCitaDentistaEstudianteMSComponent implements OnInit {
   ];
 doctorSeleccionado: string;
 
+
   constructor(
     private firebaseSvc: FirebaseEDTService,
     private utilsSvc: UtilsEDTService,
     private route: ActivatedRoute,
     private router: Router,
-        private doctorService: DoctorService,
+        private doctorService: DoctorService
     
   ) {}
 

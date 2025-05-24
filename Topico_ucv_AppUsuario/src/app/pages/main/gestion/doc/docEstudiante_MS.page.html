@@ -4,10 +4,6 @@
     <ion-content>
       <ion-list>
 
-        <ion-item *ngFor="let doctor of doctores" button detail (click)="irAHorario(doctor)" lines="none">
-    
-    </ion-item>
-
         <!-- Mostrar mensaje si no hay doctores -->
         <ion-item *ngIf="doctores.length === 0" lines="none">
           <ion-label class="ion-text-center">

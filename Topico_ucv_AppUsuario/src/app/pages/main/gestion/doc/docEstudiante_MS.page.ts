@@ -21,7 +21,7 @@ export class DocPage implements OnInit {
   // Array para almacenar los doctores
   doctores: any[] = [];
   
-  constructor() { }
+  constructor(private doctorService: DoctorService) {}
   ngOnInit() {
     // Cargar doctores al inicializar
     this.getDoctores();
@@ -49,6 +49,7 @@ seleccionarDoctor(nombre: string) {
 }
   // Método para navegar a la página de horarios con el ID del doctor
   irAHorario(doctor: any) {
+      this.doctorService.setDoctorSeleccionado(doctor);
     this.router.navigate(['main/gestion/doc/horario'], {
       queryParams: { doctorId: doctor.id, doctorNombre: doctor.name }
     });
