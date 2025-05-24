@@ -3,20 +3,24 @@
 
     <ion-content>
       <ion-list>
-        <!-- Mostrar mensaje si no hay doctores -->
-        <ion-item *ngIf="doctores.length === 0" lines="none">
-          <ion-label class="ion-text-center">
-            <p>Cargando especialistas...</p>
+<ion-item button detail lines="none" (click)="seleccionarDoctor('Dr.Ivan Gutierrez')">
+
+         
+          <ion-label>
+            <h2>Dr.Ivan Gutierrez</h2>
+            <p>Especialista en Psicologia</p>
           </ion-label>
         </ion-item>
 
-        <!-- Mostrar doctores dinámicamente desde Firestore -->
-        <ion-item *ngFor="let doctor of doctores" button detail (click)="irAHorario(doctor)" lines="none">
+<ion-item button detail lines="none" (click)="seleccionarDoctor('Dra.María García')">
+
+          
           <ion-label>
-            <h2>{{doctor.name}}</h2>
-            <p>Especialista en {{doctor.especialidad}}</p>
+            <h2>Dra.María García</h2>
+            <p>Especialista en Psicologia</p>
           </ion-label>
         </ion-item>
+        <!-- Añade más ítems para otros doctores -->
       </ion-list>
     </ion-content>
 

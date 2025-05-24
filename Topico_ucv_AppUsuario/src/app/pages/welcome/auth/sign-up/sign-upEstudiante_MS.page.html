@@ -10,28 +10,28 @@
     <!--name-->
     <app-custom-input-estudiante-ms 
     autocomplete="name" 
-    [control]="form.controls.nom"
+    [control]="form.controls.name"
     type ="text"
     label="Nombre"
     ></app-custom-input-estudiante-ms><!--{{form.value.name}} -- se usa para probar si te reconoce el name--> 
   
 
-    <div class="validators" *ngIf="form.controls.nom.errors && form.controls.nom.touched">
-      <div *ngIf="form.controls.nom.errors?.['required'] ">Este campo es requerido</div>
-      <div *ngIf="form.controls.nom.errors?.['minlenght'] ">El nombre debe tener al menos 4 caracteres</div>
+    <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
+      <div *ngIf="form.controls.name.errors?.['required'] ">Este campo es requerido</div>
+      <div *ngIf="form.controls.name.errors?.['minlenght'] ">El nombre debe tener al menos 4 caracteres</div>
     </div>
 
      <!--correo-->
     <app-custom-input-estudiante-ms 
     autocomplete="email" 
-    [control]="form.controls.hotm"
+    [control]="form.controls.email"
     type ="email"
     label="Correo"
     ></app-custom-input-estudiante-ms>
 
-    <div class="validators" *ngIf="form.controls.hotm.errors && form.controls.hotm.touched">
-      <div *ngIf="form.controls.hotm.errors?.['required'] ">El correo es requerido</div>
-      <div *ngIf="form.controls.hotm.errors?.['email'] ">Ingrese un correo</div>
+    <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+      <div *ngIf="form.controls.email.errors?.['required'] ">El correo es requerido</div>
+      <div *ngIf="form.controls.email.errors?.['email'] ">Ingrese un correo</div>
     </div>
     <ion-item>
       <ion-label position="floating">Teléfono</ion-label>
@@ -57,12 +57,12 @@
     </ion-item>
      <!--contraseña-->
     <app-custom-input-estudiante-ms 
-    [control]="form.controls.cont"
+    [control]="form.controls.password"
     label="Contraseña"
     ></app-custom-input-estudiante-ms>
     
-    <div class="validators" *ngIf="form.controls.cont.errors && form.controls.cont.touched">
-      <div *ngIf="form.controls.cont.errors?.['required'] ">La contraseña es requerida</div>
+    <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+      <div *ngIf="form.controls.password.errors?.['required'] ">La contraseña es requerida</div>
     </div>
      <!-- Estos los botones--> 
     <ion-button expand="block"  mode="ios" class="submit" type="submit" [disabled]="form.invalid">
