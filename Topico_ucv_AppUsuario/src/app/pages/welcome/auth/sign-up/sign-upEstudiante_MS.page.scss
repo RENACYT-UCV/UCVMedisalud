@@ -1,33 +1,76 @@
-// Estilos generales
+/* Estilos generales para ion-content */
 ion-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea al principio de la pantalla */
+  padding: 16px;
+  background: #f9f9f9; /* Fondo gris claro */
+  height: 100%; /* Asegura que ocupe toda la altura */
+  overflow: auto; /* Permite desplazamiento si el contenido excede la pantalla */
+}
+
+/* Estilos para el formulario */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  max-width: 800px; /* Tamaño máximo en pantallas grandes */
+  background: #ffffff; /* Fondo blanco */
+  padding: 20px;
+  margin-bottom: 20px; /* Asegura que haya espacio al final */
+
+  /* Logo en el formulario */
+  app-logo {
+    margin-bottom: 2px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
-  
-  // Estilos para el formulario
+
+  /* Personalización de campos de entrada */
+  app-custom-input {
+    margin-bottom: 0x; /* Separación entre los campos de entrada */
+  }
+
+  .validators {
+    color: red;
+    margin-bottom: 16px;
+  }
+
+  /* Botón de submit */
+  ion-button.submit {
+    margin-top: -15px;
+    padding: 14px 20px; /* Relleno más amplio para el botón */
+    font-size: 16px;
+    --background: #ff9800; /* Color de fondo personalizado para el botón */
+    --color: #ffffff; /* Color blanco para el texto */
+    --border-radius: 8px; /* Bordes redondeados */
+    transition: transform 0.3s ease-in-out; /* Animación de transformación */
+  }
+
+  ion-button.submit:hover {
+    transform: scale(1.05); /* Aumentar tamaño al hacer hover */
+  }
+}
+
+
+/* Media Queries para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
   .auth-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-  
-    app-logo {
-      margin-bottom: 24px;
-    }
-  
-    app-custom-input {
-      margin-bottom: 16px;
-    }
-  
-    .validators {
-      color: red;
-      margin-bottom: 16px;
-    }
-  
-    ion-button.submit {
-      margin-top: 24px;
-    }
+    padding: 16px; /* Reducir padding en pantallas pequeñas */
+    max-width: 90%; /* Permitir que el formulario ocupe un mayor ancho en pantallas pequeñas */
+    margin-bottom: 0; /* Eliminar margen inferior en pantallas pequeñas */
   }
-  
+
+  ion-button.submit {
+    font-size: 14px; /* Ajustar el tamaño de la fuente en el botón */
+  }
+}
+
+/* Media Queries para pantallas grandes (escritorios) */
+@media (min-width: 1200px) {
+  .auth-form {
+    max-width: 500px; /* Aumentar el tamaño máximo del formulario en pantallas grandes */
+  }
+}
+
