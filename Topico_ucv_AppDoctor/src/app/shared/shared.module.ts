@@ -10,16 +10,33 @@ import { AddUpdateCitaDentistaComponent } from './components/add-update-cita-den
 import { AddUpdateCitaFisioterapiaComponent } from './components/add-update-cita-fisioterapia/add-update-cita-fisioterapia.component';
 import { AddUpdateCitaOculistaComponent } from './components/add-update-cita-oculista/add-update-cita-oculista.component';
 
-
 @NgModule({
-  declarations: [HeaderComponent,CustomInputComponent,LogoComponent,AddUpdateCitaComponent,AddUpdateCitaDentistaComponent, AddUpdateCitaOculistaComponent,
-  AddUpdateCitaFisioterapiaComponent],
-  exports:[HeaderComponent,CustomInputComponent,LogoComponent,ReactiveFormsModule,AddUpdateCitaComponent],
+  declarations: [
+    HeaderComponent,
+    CustomInputComponent,
+    LogoComponent,
+    AddUpdateCitaComponent,
+    AddUpdateCitaDentistaComponent,
+    AddUpdateCitaOculistaComponent,
+    AddUpdateCitaFisioterapiaComponent
+  ],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule
+  ],
+  exports: [
+    HeaderComponent,
+    CustomInputComponent,
+    LogoComponent,
+    AddUpdateCitaComponent,
+    AddUpdateCitaDentistaComponent,
+    AddUpdateCitaOculistaComponent,
+    AddUpdateCitaFisioterapiaComponent,
+    IonicModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

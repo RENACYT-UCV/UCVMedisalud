@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { user } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase_Datos_App.service';
@@ -12,24 +12,22 @@ import { Camara_utilsService } from 'src/app/services/Camara_utils.service';
   styleUrls: ['./add-update-cita.component.scss'],
 })
 export class AddUpdateCitaComponent implements OnInit {
-  
-
   @Input() cita: Cita;
 
   form = new FormGroup({
-      id: new FormControl(''),
-      image: new FormControl(''),
-      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      dni: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
-      price: new FormControl(null),
-      fecha: new FormControl(null, [Validators.required, this.validateDate]),
-      hora: new FormControl(null, Validators.required),
-      doctor: new FormControl(null, Validators.required),
-      facultad: new FormControl(null, Validators.required),
-      tipo: new FormControl('Psicología'),
-      soldUnits: new FormControl(null, Validators.required),
-      email: new FormControl(null, [Validators.required, Validators.email])
-    });
+    id: new FormControl(''),
+    image: new FormControl(''),
+    name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    dni: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
+    price: new FormControl(null),
+    date: new FormControl(null, [Validators.required, this.validateDate]),
+    time: new FormControl(null, Validators.required),
+    doctor: new FormControl(null, Validators.required),
+    facultad: new FormControl(null, Validators.required),
+    type: new FormControl('Psicología'),
+    phone: new FormControl(null, Validators.required),
+    email: new FormControl(null, [Validators.required, Validators.email])
+  });
 
   user = {} as user;
   doctors: string[] = [];
@@ -44,39 +42,31 @@ export class AddUpdateCitaComponent implements OnInit {
   async ngOnInit() {
     this.user = this.utilsSvc.getFromLocalStorage('user');
     await this.cargarDoctoresDisponibles();
-    
+
     if (this.cita) {
-      this.form.setValue(this.cita);
+      this.form.patchValue(this.cita);
     } else {
       this.setUserDetails();
     }
 
-    // Obtener el doctor seleccionado de los parámetros de la ruta
     this.route.paramMap.subscribe(params => {
       const selectedDoctor = params.get('doctor');
       if (selectedDoctor) {
         this.form.controls.doctor.setValue(selectedDoctor);
       }
-    });
-
-    this.route.paramMap.subscribe(params => {
       const selectedHour = params.get('hora');
       if (selectedHour) {
-        this.form.controls.hora.setValue(selectedHour);
+        this.form.controls.time.setValue(selectedHour);
       }
     });
   }
 
   async cargarDoctoresDisponibles() {
     try {
-      // Obtener el doctor de los parámetros de la ruta
       const doctor = this.route.snapshot.paramMap.get('doctor');
-      
       if (doctor) {
-        // Si hay un doctor en los parámetros, usarlo
         this.doctors = [doctor];
       } else {
-        // Si no hay doctor en los parámetros, mostrar mensaje de error
         this.utilsSvc.presentToast({
           message: 'No se pudo cargar el doctor seleccionado',
           duration: 2500,
@@ -96,11 +86,16 @@ export class AddUpdateCitaComponent implements OnInit {
       });
     }
   }
+setNumberInputs() {
+  const { price, phone } = this.form.controls;
+  if (price.value) price.setValue(parseFloat(price.value));
+  if (phone && phone.value) phone.setValue(String(phone.value)); // si necesitas asegurar que phone sea string o número
+}
 
   setUserDetails() {
     this.form.controls.name.setValue(this.user.name);
     this.form.controls.dni.setValue(this.user.dni);
-    this.form.controls.soldUnits.setValue(this.user.phone);
+    this.form.controls.phone.setValue(this.user.phone);
     this.form.controls.facultad.setValue(this.user.facultad);
     this.form.controls.email.setValue(this.user.email);
   }
@@ -112,33 +107,28 @@ export class AddUpdateCitaComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      if (this.cita) this.updateProduct();
+      if (this.cita) this.updateCita();
       else this.createCita();
     }
   }
 
-  setNumberInputs() {
-    let { soldUnits, price } = this.form.controls;
-    if (soldUnits.value) soldUnits.setValue(parseFloat(soldUnits.value));
-    if (price.value) price.setValue(parseFloat(price.value));
-  }
-
   async createCita() {
-    let path = `Estudiantes/${this.user.uid}/cita`;
+    const path = `Estudiantes/${this.user.uid}/cita`;
 
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
     if (this.form.value.image) {
-      let dataUrl = this.form.value.image;
-      let imagePath = `${this.user.uid}/${Date.now()}`;
-      let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
+      const dataUrl = this.form.value.image;
+      const imagePath = `${this.user.uid}/${Date.now()}`;
+      const imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
       this.form.controls.image.setValue(imageUrl);
     }
 
-    delete this.form.value.id;
+    const formValue = { ...this.form.value };
+    delete formValue.id;
 
-    this.firebaseSvc.addDocument(path, this.form.value).then(async res => {
+    this.firebaseSvc.addDocument(path, formValue).then(async () => {
       this.utilsSvc.dismissModal({ success: true });
 
       this.utilsSvc.presentToast({
@@ -149,11 +139,9 @@ export class AddUpdateCitaComponent implements OnInit {
         icon: 'checkmark-circle-outline'
       });
 
-      this.router.navigate(['/main/gestion']); // Navega a la ruta deseada
-
+      this.router.navigate(['/main/gestion']);
     }).catch(error => {
-      console.log(error);
-
+      console.error(error);
       this.utilsSvc.presentToast({
         message: error.message,
         duration: 2500,
@@ -166,37 +154,36 @@ export class AddUpdateCitaComponent implements OnInit {
     });
   }
 
-  async updateProduct() {
-    let path = `Estudiante/${this.user.uid}/cita_psicologo/${this.cita.id}`;
+  async updateCita() {
+    const path = `Estudiantes/${this.user.uid}/cita/${this.cita.id}`;
 
     const loading = await this.utilsSvc.loading();
     await loading.present();
 
     if (this.form.value.image !== this.cita.image && this.form.value.image) {
-      let dataUrl = this.form.value.image;
-      let imagePath = await this.firebaseSvc.getFilepath(this.cita.image);
-      let imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
+      const dataUrl = this.form.value.image;
+      const imagePath = await this.firebaseSvc.getFilepath(this.cita.image);
+      const imageUrl = await this.firebaseSvc.uploadImage(imagePath, dataUrl);
       this.form.controls.image.setValue(imageUrl);
     }
 
-    delete this.form.value.id;
+    const formValue = { ...this.form.value };
+    delete formValue.id;
 
-    this.firebaseSvc.updateDocument(path, this.form.value).then(async res => {
+    this.firebaseSvc.updateDocument(path, formValue).then(async () => {
       this.utilsSvc.dismissModal({ success: true });
 
       this.utilsSvc.presentToast({
-        message: 'Cita actualizado exitosamente',
+        message: 'Cita actualizada exitosamente',
         duration: 1500,
         color: 'success',
         position: 'middle',
         icon: 'checkmark-circle-outline'
       });
 
-      this.router.navigate(['/ruta-deseada']); // Navega a la ruta deseada
-
+      this.router.navigate(['/ruta-deseada']);
     }).catch(error => {
-      console.log(error);
-
+      console.error(error);
       this.utilsSvc.presentToast({
         message: error.message,
         duration: 2500,
@@ -210,14 +197,11 @@ export class AddUpdateCitaComponent implements OnInit {
   }
 
   validateDate(control: FormControl) {
+    if (!control.value) return null;
     const selectedDate = new Date(control.value);
     const today = new Date();
-    today.setHours(0, 0, 0, 0); 
+    today.setHours(0, 0, 0, 0);
 
-    if (selectedDate < today) {
-      return { pastDate: true }; 
-    }
-
-    return null; 
+    return selectedDate < today ? { pastDate: true } : null;
   }
 }

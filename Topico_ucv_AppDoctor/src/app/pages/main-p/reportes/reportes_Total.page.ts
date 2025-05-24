@@ -1,97 +1,105 @@
-//HISTORIAL DE CITAS (DESDE 2020)
-
-import { Component, OnInit, inject } from '@angular/core';
-import { orderBy,where} from 'firebase/firestore';
+import { Component, OnInit, inject, OnDestroy } from '@angular/core';
+import { orderBy, where, query, collectionGroup, getFirestore, onSnapshot, Unsubscribe } from 'firebase/firestore';
 import { Cita } from 'src/app/models/cita.model';
-import { collectionGroup, getFirestore, query, onSnapshot } from 'firebase/firestore';
 import { user } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase_Datos_App.service';
-import { AddUpdateCitaComponent } from 'src/app/shared/components/add-update-cita/add-update-cita.component';
 import { Camara_utilsService } from 'src/app/services/Camara_utils.service';
+
 @Component({
   selector: 'app-reportes_Total',
   templateUrl: './reportes_Total.page.html',
   styleUrls: ['./reportes_Total.page.scss'],
 })
-export class Reportes_TotalPage implements OnInit {
+export class Reportes_TotalPage implements OnInit, OnDestroy {
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(Camara_utilsService);
-  
-  //cerrar sesion
-singOut(){
-  this.firebaseSvc.sigOut();
-}
 
   citas: Cita[] = [];
   loading: boolean = false;
 
-  citaEstado(cita): string {
-    const fechaCita = new Date(`${cita.fecha}T${cita.hora}:00`);
+  private unsubscribeCitas: Unsubscribe | null = null;
+
+  // Cerrar sesión
+  singOut() {
+    this.firebaseSvc.sigOut();
+  }
+
+  citaEstado(cita: Cita): string {
+    const fechaCita = new Date(`${cita.date}T${cita.time}:00`);
     const now = new Date();
     return fechaCita < now ? 'Cita Concluida' : 'Cita Pendiente';
   }
 
-  citaEstadoColor(cita): string {
-    const fechaCita = new Date(`${cita.fecha}T${cita.hora}:00`);
+  citaEstadoColor(cita: Cita): string {
+    const fechaCita = new Date(`${cita.date}T${cita.time}:00`);
     const now = new Date();
     return fechaCita < now ? 'danger' : 'success';
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    // Cancelar la suscripción al destruir el componente para evitar fugas de memoria
+    if (this.unsubscribeCitas) {
+      this.unsubscribeCitas();
+    }
   }
+
   user(): user {
     return this.utilsSvc.getFromLocalStorage('user');
   }
+
   ionViewWillEnter() {
     this.getProducts();
   }
-   doRefresh(event) {
+
+  doRefresh(event: any) {
     setTimeout(() => {
-      this.getProducts
+      this.getProducts();
       event.target.complete();
     }, 1000);
-   }
-  //====Obtener citas de hoy=============
-  getCitasHoy(){
-    let hoy = new Date();
-    hoy.setHours(0, 0, 0, 0); // establece la hora a medianoche para la comparación
-  
+  }
+
+  // Obtener citas de hoy
+  getCitasHoy(): Cita[] {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
     return this.citas.filter(cita => {
-      let fechaCita = new Date(cita.fecha);
-      fechaCita.setHours(0, 0, 0, 0); // establece la hora a medianoche para la comparación
-  
+      const fechaCita = new Date(cita.date);
+      fechaCita.setHours(0, 0, 0, 0);
       return fechaCita.getTime() === hoy.getTime();
     });
   }
-  
 
-  //====Obtener las citas=============
-  
+  // Obtener todas las citas
   getProducts() {
     this.loading = true;
-    let user = this.utilsSvc.getFromLocalStorage('user'); // Obtén el usuario actual
-  
-    // Utilizamos una consulta de grupo de colecciones para obtener todas las citas
-    let citasQuery = query(
+    const user = this.utilsSvc.getFromLocalStorage('user');
+
+    const citasQuery = query(
       collectionGroup(getFirestore(), 'cita'),
-      where('doctor', '==', user.name), // Filtra solo las citas del doctor con el mismo nombre del usuario
-      orderBy('fecha', 'desc')
+      where('doctor', '==', user.name),
+      orderBy('date', 'desc')
     );
-  
-    let sub = onSnapshot(citasQuery, (querySnapshot) => {
-      let citas = [];
+
+    // Si ya existe una suscripción activa, la cancelamos antes de crear una nueva
+    if (this.unsubscribeCitas) {
+      this.unsubscribeCitas();
+    }
+
+    this.unsubscribeCitas = onSnapshot(citasQuery, (querySnapshot) => {
+      const citas: Cita[] = [];
       querySnapshot.forEach((doc) => {
-        citas.push(doc.data());
+        citas.push(doc.data() as Cita);
       });
-      console.log(citas);
       this.citas = citas;
       this.loading = false;
-      // No es necesario desuscribirse de onSnapshot
     }, (error) => {
-       
+      console.error('Error obteniendo citas:', error);
+      this.loading = false;
     });
   }
-  
-}
 
+}

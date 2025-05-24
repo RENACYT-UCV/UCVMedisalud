@@ -43,7 +43,7 @@ export class CCPage implements OnInit {
   getCitasConcluidas() {
     const now = new Date();
     return this.citas.filter(cita => {
-      const fechaCita = new Date(`${cita.fecha}T${cita.hora}:00`);
+      const fechaCita = new Date(`${cita.date}T${cita.time}:00`);
       return fechaCita < now; // Filtra solo las citas concluidas
     });
   }
@@ -72,7 +72,7 @@ export class CCPage implements OnInit {
     hoy.setHours(0, 0, 0, 0); // Establece la hora a medianoche para la comparación
 
     return this.citas.filter(cita => {
-      let fechaCita = new Date(cita.fecha);
+      let fechaCita = new Date(cita.date);
       fechaCita.setHours(0, 0, 0, 0); // Establece la hora a medianoche para la comparación
 
       return fechaCita.getTime() === hoy.getTime();
