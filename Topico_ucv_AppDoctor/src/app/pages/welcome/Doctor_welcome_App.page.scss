@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: linear-gradient(45deg, #f5c9c9, #f7e1e1);
+  background: #ffffff;
 }
 
 .container::before,
@@ -18,20 +18,29 @@
 }
 
 .container::before {
-  background-color: #ffffff; /* Color rojo */
+  background-color: #ffffff; /* */
   top: -50px; /* Posición en la parte superior */
   left: -50px; /* Posición en la izquierda */
 }
 
 .container::after {
-  background-color: #ad0b0b; /* Color blanco */
+  background-color: #ffffff; /*  */
   bottom: -50px; /* Posición en la parte inferior */
   right: -50px; /* Posición en la derecha */
+}
+
+.logo-img{
+  width: 80%;             // Se adapta al ancho del contenedor
+  max-width: 300px;       // Límite máximo para pantallas grandes
+  height: auto;           // Mantiene la proporción original
+  margin-top: -100px;      // Ajusta según lo que quieras moverla
+  display: block
 }
 
 .logo-container {
   text-align: center;
   margin-bottom: 20px;
+ 
 }
 
 .logo {
@@ -41,16 +50,18 @@
 }
 
 .welcome-text {
-  font-size: 24px;
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
   color: #000000;
-  font-style: italic;
+  margin-top: -30px;
+   display: block
+ 
 }
 
 .university-text {
   font-size: 18px;
   color: #3f4042;
-  font-style: oblique;
+  font-style: normal;
 }
 
 .button-container {
@@ -60,7 +71,6 @@
   right: 0;
   text-align: center;
   margin-bottom: 60px;
-  font-style: italic;
 }
 
 .square-button {
@@ -79,6 +89,8 @@
   width: 200px; /* Ancho del botón */
   height: 50px; /* Altura del botón */
   margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10;
 }
 
 .content-background {
@@ -110,7 +122,7 @@
   --padding-top: 12px;
   --padding-bottom: 12px;
   font-size: 16px; /* Aumentar el tamaño del texto */
-  --ion-icon-size: 20px; /* Aumentar el tamaño del icono */
+  --ion-icon-size: 10px; /* Aumentar el tamaño del icono */
   transition: transform 0.3s ease; /* Animación de transición */
 }
 
@@ -119,7 +131,7 @@
 }
 
 .doctor-button {
-  --background: linear-gradient(135deg, #72c6ef, #004e92); /* Fondo degradado */
+  --background:  #a22b27; 
   --color: white;
 }
 

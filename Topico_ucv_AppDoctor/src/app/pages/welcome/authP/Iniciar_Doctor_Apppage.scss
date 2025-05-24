@@ -1,41 +1,48 @@
 /* Estilos generales */
 .content-background {
-  background-color: #a12a2a;
+  background-color: #a12a2a; /* Fondo rojo */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
   padding: 20px;
-  margin: 0; /* Asegura que no haya margen */
+  margin: 0;
+  box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
 }
 
 .form-container {
-  background-color:rgb(148, 0, 0);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: rgba(163, 45, 45, 0.829); /* Fondo rojo translúcido */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 40px;
-  border-radius: 10px; /* Añade bordes redondeados */
-  max-width: 500px;
   width: 100%;
+  max-width: 600px; /* Limita el tamaño máximo en escritorios */
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.logo-img {
+  width: 60%;
+  max-width: 150px;
+  margin-bottom: 20px;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.animated-logo {
-  width: 150px;
-  margin-bottom: 20px;
+  width: 100%;
 }
 
 .input-field {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .validators {
-  color: #d9534f;
+  color: #ffffff;
   font-size: 14px;
   margin-top: -10px;
   margin-bottom: 10px;
@@ -49,30 +56,24 @@
   text-decoration: underline;
 }
 
-.elegant-button:hover {
-  transform: scale(1.05);
-  --color: rgb(255, 0, 0);
-  --background: linear-gradient(135deg, #eef4fa, #ffffff);
-}
-
 .submit-button {
   --background: linear-gradient(135deg, #fdfdfd, #ffe9e9);
-  --color: rgb(255, 0, 0);
-  --border-color: transparent; /* Elimina el contorno */
-  width: 100%; /* Ajusta el ancho al 100% del contenedor */
-  max-width: 300px; /* Ancho máximo para evitar que sea demasiado grande */
-  padding: 10px 20px; /* Espaciado interno */
-  border-radius: 5px; /* Bordes redondeados */
-  font-size: 16px; /* Tamaño de la fuente */
-  text-align: center; /* Centra el texto */
-  display: block; /* Asegura que el botón sea un bloque */
-  margin: 0 auto; /* Centra el botón horizontalmente */
+  color: #000000;
+  --border-color: transparent;
+  width: 100%;
+  max-width: 300px;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  display: block;
+  margin: 10px 0; /* Espaciado entre botones */
 }
 
 .register-button, .back-button {
   --background: linear-gradient(135deg, #fdfdfd, #ffe9e9);
   --color: rgb(255, 0, 0);
-  --border-color: transparent; /* Elimina el contorno */
+  --border-color: transparent;
 }
 
 .back-button {
@@ -105,4 +106,54 @@
   font-size: 14px;
   color: #ffffff;
   margin-left: 4px;
+}
+
+.auth-form input[type="text"], .auth-form input[type="password"] {
+  padding: 12px;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.auth-form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.submit-button:hover {
+  color: #ffffff;
+}
+
+/* Media Queries para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  .form-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .logo-img {
+    width: 80%;
+    max-width: 120px;
+  }
+
+  .submit-button {
+    padding: 12px 20px;
+    font-size: 18px;
+  }
+
+  .auth-form input[type="text"], .auth-form input[type="password"] {
+    font-size: 14px;
+  }
+}
+
+/* Media Queries para pantallas grandes (escritorios grandes) */
+@media (min-width: 1200px) {
+  .form-container {
+    max-width: 600px; /* Aumenta el tamaño máximo en pantallas grandes */
+  }
+
+  .logo-img {
+    max-width: 180px;
+  }
 }

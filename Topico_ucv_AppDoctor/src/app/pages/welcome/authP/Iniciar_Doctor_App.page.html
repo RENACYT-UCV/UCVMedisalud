@@ -1,7 +1,7 @@
 
 <ion-content class="content-background">
   <div class="form-container">
-    <ion-label class="remember-me-label">Aqui va un logo</ion-label><br><br><br><br><br><br><br>
+    <img class="logo-img" src="../assets/icon/logoDoctor.svg" alt="">
     <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit">
    
 
@@ -50,7 +50,9 @@
         
       </ion-button>
      
-    </form><br><br><br><br><br><br><br><br><br><br>
+    </form>
     <p routerLink="forgot-password" class="forgot-password-link">¡Olvidaste tu contraseña?</p>
+     <br><br><br><br>   
   </div>
+ 
 </ion-content>
