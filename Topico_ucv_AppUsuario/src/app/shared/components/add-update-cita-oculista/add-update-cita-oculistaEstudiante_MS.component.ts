@@ -6,6 +6,7 @@ import { UtilsEDTService } from 'src/app/services/utils_EDT.service';
 import { Cita } from 'src/app/models/cita.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment-timezone';
+import { DoctorService } from 'src/app/services/doctor_services';
 
 @Component({
   selector: 'app-add-update-cita-oculista-estudiante-ms',
@@ -43,16 +44,22 @@ export class AddUpdateCitaOculistaEstudianteMSComponent implements OnInit {
     { nombre: 'Viernes', valor: 'Viernes' },
     { nombre: 'Sábado', valor: 'Sábado' },
   ];
+doctorSeleccionado: string;
 
   constructor(
     private firebaseSvc: FirebaseEDTService,
     private utilsSvc: UtilsEDTService,
     private route: ActivatedRoute,
+    private doctorService: DoctorService,
     private router: Router
   ) {}
 
   ngOnInit() {
+
+
     this.user = this.utilsSvc.getFromLocalStorage('user');
+    this.doctorSeleccionado = this.doctorService.getDoctorSeleccionado('oculista') || '';
+    this.form.controls.doctor.setValue(this.doctorSeleccionado); // También lo carga al FormGroup
 
     if (this.cita) {
       this.form.setValue(this.cita);
@@ -194,5 +201,7 @@ export class AddUpdateCitaOculistaEstudianteMSComponent implements OnInit {
     const formattedDate = nextDate.toISOString().substring(0, 10);
     this.form.controls.date.setValue(formattedDate); 
     }
+    
   }
+
 }

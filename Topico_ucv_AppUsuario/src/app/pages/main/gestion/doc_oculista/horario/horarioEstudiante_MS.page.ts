@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorService } from 'src/app/services/doctor_services';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-horario-oculista',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HorarioPage implements OnInit {
 
-  constructor() { }
+     constructor( 
+     ) { 
 
-  ngOnInit() {
-  }
+     }
+  seleccionarDoctor(nombre: string) {
+  
+     }
+     ngOnInit() {
+     }
+
 
 }
