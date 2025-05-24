@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-/* import { DoctorService } from 'src/app/services/doctor_services'; */
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { FirebaseEDTService } from 'src/app/services/firebase_EDT.service';
+import { Router } from '@angular/router';
+import { where } from 'firebase/firestore';
 
 @Component({
   selector: 'app-doc-oculista',
@@ -9,16 +10,39 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class DocPage implements OnInit {
 
- constructor(
-          private router: Router, private route: ActivatedRoute,
-          /* private doctorService: DoctorService */
-         ) { }
-       seleccionarDoctor(doctor: string) {
-  /* this.doctorService.setDoctorSeleccionado('oculista', doctor); */
-    this.router.navigate(['horario'], { relativeTo: this.route });
-         }
-         ngOnInit() {
-         }
-}
-     
+  // Inyectar el servicio de Firebase
+  firebaseSvc = inject(FirebaseEDTService);
+  router = inject(Router);
+  
+  // Array para almacenar los doctores
+  doctores: any[] = [];
+  
+  constructor() { }
+
+  ngOnInit() {
+    // Cargar doctores al inicializar
+    this.getDoctores();
+  }
+
+  // Método para obtener doctores de Firestore
+  getDoctores() {
+    // Consulta para obtener doctores con especialidad 'Oftalmologia'
+    const path = 'user';
+    const collectionQuery = [
+      where('especialidad', '==', 'Oftalmologia'),
+      where('role', '==', 'admin')
+    ];
     
+    this.firebaseSvc.getCollecitionData(path, collectionQuery).subscribe(data => {
+      console.log('Doctores Oculista:', data);
+      this.doctores = data;
+    });
+  }
+
+  // Método para navegar a la página de horarios con el ID del doctor
+  irAHorario(doctor: any) {
+    this.router.navigate(['main/gestion/doc_oculista/horario'], {
+      queryParams: { doctorId: doctor.id, doctorNombre: doctor.name }
+    });
+  }
+}

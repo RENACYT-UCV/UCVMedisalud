@@ -1,17 +1,17 @@
 export interface Cita {
-  name: string;          // Nombre completo del paciente
-  phone: string;         // Número telefónico de contacto
-  price: number | null;  // Precio de la consulta (puede ser null)
-  dni: string;           // Documento Nacional de Identidad
-  image: string;         // URL de la imagen de perfil/documentación
-  date: string;          // Fecha de la cita en formato ISO (YYYY-MM-DD)
-  age: string;           // Edad del paciente
-  time: string;          // Hora de la cita en formato HH:MM
-  doctor: string;        // Nombre del médico asignado
-  facultad: string;      // Facultad académica del paciente
-  email: string;         // Correo electrónico de contacto
-  type: string;          // Tipo de consulta médica
-  id: string;            // Identificador único en Firestore
-  estado?: string;       // Estado actual de la cita (opcional)
-  day?: string;          // Día de la semana de la cita (opcional)
+  name: string;          // "name"
+  phone: string;         // "phone"
+  price: number | null;  // "price" puede ser null
+  dni: string;           // "dni"
+  image: string;         // "image"
+  date: string;          // "date" en la bd es string "2025-05-23"
+  age: string;           // "age" es string "18"
+  time: string;          // "time" es string "08:00"
+  doctor: string;        // "doctor"
+  facultad: string;      // "facultad"
+  email: string;         // "email"
+  type: string;          // "type"
+  id: string;            // id del documento Firestore, no está en la imagen pero usualmente se usa
+  estado?: string;       // "estado" no aparece en la imagen, lo dejo opcional
+  day?: string;          // "day" está en la BD, es string "Sábado", lo agrego opcional
 }

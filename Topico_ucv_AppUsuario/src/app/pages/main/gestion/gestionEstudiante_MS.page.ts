@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestion',
@@ -14,12 +13,9 @@ export class GestionPage implements OnInit {
     {id: 2, vendor: 'Turno Tarde', image: '', time: '1:00PM - 9:00 PM'}
   ];
 
-   constructor(
-        
-         ) { }
-  
-         
-         ngOnInit() {
-         }
+  constructor() { }
+
+  ngOnInit() {
+  }
 
 }
