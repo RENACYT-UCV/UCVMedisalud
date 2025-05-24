@@ -172,16 +172,16 @@ export class AddUpdateCitaEstudianteMSComponent implements OnInit {
   }
 
   async createCita() {
-    const path = `Estudiantes/${this.user.uid}/citas/${this.form.value.type.toLowerCase()}`;
+    const path = `Estudiantes/${this.user.uid}/cita`;
     const loading = await this.utilsSvc.loading();
     await loading.present();
-
+  
     try {
       if (this.form.value.image) {
         const imageUrl = await this.uploadImage();
         this.form.controls.image.setValue(imageUrl);
       }
-
+  
       delete this.form.value.id;
       await this.firebaseSvc.addDocument(path, this.form.value);
       this.utilsSvc.dismissModal({ success: true });
@@ -196,21 +196,21 @@ export class AddUpdateCitaEstudianteMSComponent implements OnInit {
   }
 
   async updateCita() {
-    const path = `Estudiantes/${this.user.uid}/citas/${this.form.value.type.toLowerCase()}/${this.cita.id}`;
+    const path = `Estudiantes/${this.user.uid}/cita/${this.cita.id}`;
     const loading = await this.utilsSvc.loading();
     await loading.present();
-
+  
     try {
       if (this.form.value.image !== this.cita.image && this.form.value.image) {
         const imageUrl = await this.uploadImage();
         this.form.controls.image.setValue(imageUrl);
       }
-
+  
       delete this.form.value.id;
       await this.firebaseSvc.updateDocument(path, this.form.value);
       this.utilsSvc.dismissModal({ success: true });
       this.presentToast('Cita actualizada exitosamente', 'success');
-      this.router.navigate(['/ruta-deseada']);
+      this.router.navigate(['/main/gestion']);
     } catch (error) {
       console.error('Error actualizando cita', error);
       this.presentToast(error.message, 'danger');
