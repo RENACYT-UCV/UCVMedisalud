@@ -87,63 +87,123 @@ export class ReportesGeneral_ISPage implements OnInit, OnDestroy {
 
     const db = getFirestore();
 
+    // Consultas actualizadas para buscar en las colecciones correctas
+    // Para psicología, buscamos en la colección 'cita' donde type sea 'Psicologia'
     const citasQuery = query(collectionGroup(db, 'cita'), orderBy('date', 'desc'));
-    const citasDentistaQuery = query(collectionGroup(db, 'cita_dentista'), orderBy('date', 'desc'));
-    const citasFisioterapiaQuery = query(collectionGroup(db, 'cita_fisioterapia'), orderBy('date', 'desc'));
-    const citasOculistaQuery = query(collectionGroup(db, 'cita_oculista'), orderBy('date', 'desc'));
+    // Para las demás especialidades, usamos las colecciones específicas
+    const citasDentistaQuery = query(collectionGroup(db, 'cita'), orderBy('date', 'desc'));
+    const citasFisioterapiaQuery = query(collectionGroup(db, 'cita'), orderBy('date', 'desc'));
+    const citasOculistaQuery = query(collectionGroup(db, 'cita'), orderBy('date', 'desc'));
 
-    // General
+    // Psicología
     this.unsubscribeCitas = onSnapshot(citasQuery, (querySnapshot) => {
       const citas: Cita_Estructura[] = [];
       querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        console.log('Cita general:', data);
-        citas.push(data as Cita_Estructura);
+        const data = doc.data() as any;
+        // Aseguramos que la hora esté disponible
+        if (data['type'] === 'Psicologia') {
+          // Si el campo time existe pero hora no, usamos time
+          if (data['time'] && !data['hora']) {
+            data['hora'] = data['time'];
+          }
+          // Si el campo tipo no existe, lo establecemos
+          if (!data['tipo']) {
+            data['tipo'] = data['type'] || 'Psicologia';
+          }
+          // Si el campo soldUnits no existe pero phone sí, usamos phone
+          if (!data['soldUnits'] && data['phone']) {
+            data['soldUnits'] = data['phone'];
+          }
+          console.log('Cita psicología:', data);
+          citas.push(data as Cita_Estructura);
+        }
       });
       this.citas = citas;
       this.loading = false;
     }, (error) => {
-      console.error('Error al cargar citas generales:', error);
+      console.error('Error al cargar citas de psicología:', error);
       this.loading = false;
     });
 
-    // Dentista
+    // Odontología
     this.unsubscribeDentista = onSnapshot(citasDentistaQuery, (querySnapshot) => {
       const citas: Cita_Estructura[] = [];
       querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        console.log('Cita dentista:', data);
-        citas.push(data as Cita_Estructura);
+        const data = doc.data() as any;
+        if (data['type'] === 'odontologia') {
+          // Aseguramos que la hora esté disponible
+          if (data['time'] && !data['hora']) {
+            data['hora'] = data['time'];
+          }
+          // Si el campo tipo no existe, lo establecemos
+          if (!data['tipo']) {
+            data['tipo'] = data['type'] || 'Odontología';
+          }
+          // Si el campo soldUnits no existe pero phone sí, usamos phone
+          if (!data['soldUnits'] && data['phone']) {
+            data['soldUnits'] = data['phone'];
+          }
+          console.log('Cita odontología:', data);
+          citas.push(data as Cita_Estructura);
+        }
       });
       this.citasDentista = citas;
     }, (error) => {
-      console.error('Error al cargar citas dentista:', error);
+      console.error('Error al cargar citas de odontología:', error);
     });
 
     // Fisioterapia
     this.unsubscribeFisio = onSnapshot(citasFisioterapiaQuery, (querySnapshot) => {
       const citas: Cita_Estructura[] = [];
       querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        console.log('Cita fisio:', data);
-        citas.push(data as Cita_Estructura);
+        const data = doc.data() as any;
+        if (data['type'] === 'Fisioterapia') {
+          // Aseguramos que la hora esté disponible
+          if (data['time'] && !data['hora']) {
+            data['hora'] = data['time'];
+          }
+          // Si el campo tipo no existe, lo establecemos
+          if (!data['tipo']) {
+            data['tipo'] = data['type'] || 'Fisioterapia';
+          }
+          // Si el campo soldUnits no existe pero phone sí, usamos phone
+          if (!data['soldUnits'] && data['phone']) {
+            data['soldUnits'] = data['phone'];
+          }
+          console.log('Cita fisioterapia:', data);
+          citas.push(data as Cita_Estructura);
+        }
       });
       this.citasFisioterapia = citas;
     }, (error) => {
-      console.error('Error al cargar citas fisio:', error);
+      console.error('Error al cargar citas de fisioterapia:', error);
     });
 
-    // Oculista
+    // Oftalmología
     this.unsubscribeOculista = onSnapshot(citasOculistaQuery, (querySnapshot) => {
       const citas: Cita_Estructura[] = [];
       querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        console.log('Cita oculista:', data);
-        citas.push(data as Cita_Estructura);
+        const data = doc.data() as any;
+        if (data['type'] === 'Oftalmologia') {
+          // Aseguramos que la hora esté disponible
+          if (data['time'] && !data['hora']) {
+            data['hora'] = data['time'];
+          }
+          // Si el campo tipo no existe, lo establecemos
+          if (!data['tipo']) {
+            data['tipo'] = data['type'] || 'Oftalmología';
+          }
+          // Si el campo soldUnits no existe pero phone sí, usamos phone
+          if (!data['soldUnits'] && data['phone']) {
+            data['soldUnits'] = data['phone'];
+          }
+          console.log('Cita oftalmología:', data);
+          citas.push(data as Cita_Estructura);
+        }
       });
       this.citasOculista = citas;
     }, (error) => {
-      console.error('Error al cargar citas oculista:', error);
-    });
+      console.error('Error al cargar citas de oftalmología:', error);
+    });}
   }
-}
+
