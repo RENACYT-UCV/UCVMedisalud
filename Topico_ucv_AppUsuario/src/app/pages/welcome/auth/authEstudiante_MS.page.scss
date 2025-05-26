@@ -4,8 +4,12 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+
   }
   
+  .content-background{
+    background: white;
+  }
   .logo-container {
     text-align: center;
   }
@@ -146,3 +150,6 @@ ion-button{
   
 }
 
+.d-flex-center {
+  min-height: 1px;
+}
