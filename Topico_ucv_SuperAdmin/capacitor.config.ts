@@ -1,9 +1,10 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'Medisalud_admin',
-  webDir: 'www'
+  appId: 'com.mmc.medisaludsadmin',
+  appName: 'Medisalud Admin',
+  webDir: 'www',
+  bundledWebRuntime: false
 };
 
 export default config;

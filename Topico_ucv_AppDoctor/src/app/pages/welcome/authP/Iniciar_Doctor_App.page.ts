@@ -17,6 +17,10 @@ export class Iniciar_Doctor_AppPage implements OnInit {
     password: new FormControl('', [Validators.required]),
     rememberMe: new FormControl(false)
   });
+
+  // Variable para controlar el tipo de input de la contraseña
+  passwordFieldType: 'password' | 'text' = 'password';
+
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(Camara_utilsService);
 
@@ -31,6 +35,11 @@ export class Iniciar_Doctor_AppPage implements OnInit {
         rememberMe: true
       });
     }
+  }
+
+  // Función para alternar la visibilidad de la contraseña
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 
   async submit() {

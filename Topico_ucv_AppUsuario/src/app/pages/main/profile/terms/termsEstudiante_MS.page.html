@@ -9,7 +9,7 @@
 
     <!-- Sección 2: Privacidad -->
     <h2>Privacidad</h2>
-    <p>Respetamos su privacidad. Consulte nuestra <a href="/privacy-policy">política de privacidad</a> para obtener más detalles sobre cómo manejamos sus datos personales.</p>
+    <p>Respetamos su privacidad. Consulte nuestra política de privacidad para obtener más detalles sobre cómo manejamos sus datos personales.</p>
 
     <!-- Sección 3: Responsabilidad -->
     <h2>Responsabilidad</h2>
@@ -20,6 +20,8 @@
     <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Cualquier cambio será notificado a través de la aplicación o por correo electrónico.</p>
 
     <!-- Botón de Aceptación -->
-    <ion-button expand="full" color="primary" routerLink="/accept-terms">Acepto los Términos</ion-button>
+    <ion-button expand="full" color="primary" (click)="aceptarTerminos()">
+      Acepto los Términos
+    </ion-button>
   </div>
 </ion-content>

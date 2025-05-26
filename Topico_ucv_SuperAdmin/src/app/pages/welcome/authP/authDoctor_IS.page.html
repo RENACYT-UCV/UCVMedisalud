@@ -22,6 +22,7 @@
 
       <app-custom-input 
         [control]="form.controls.password"
+            [type]="passwordFieldType"
         label="Contraseña"
         class="input-field"
       ></app-custom-input>
@@ -38,13 +39,7 @@
       </ion-button>
 
 
-      <div class="button-container">
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-button color="dark" routerLink="/welcome" class="rectangular-button doctor-button">
-            Regresar
-          </ion-button>
-        </ion-fab>
-      </div>
+
       
         
     </form>

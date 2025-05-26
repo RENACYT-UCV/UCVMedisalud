@@ -1,5 +1,6 @@
 <app-header-estudiante-ms title="Login"></app-header-estudiante-ms>
-<ion-content class="content-background">
+<ion-content class="content-background" fullscreen scrollEvents="false" keyboard-attach="false">
+
   <div class="d-flex-center">
     <!-- Este es el formulario -->
     <form   [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit">
@@ -21,6 +22,7 @@
 
       <app-custom-input-estudiante-ms
         [control]="form.controls.password"
+          [type]="passwordFieldType"
         label="Contraseña"
         class="input-field"
       ></app-custom-input-estudiante-ms>
@@ -41,9 +43,7 @@
       </ion-button>
     </form>
   </div>
-  <!-- Botón de retroceso -->
-  <ion-button class="back-button" routerLink="/welcome" expand="block" mode="ios" >
-  </ion-button>
+
 
 
 </ion-content>

@@ -2,22 +2,7 @@
 
 <ion-content class="ion-padding-top ion-text-center">
   <ion-card>
-    <ion-avatar>
-      <img *ngIf="user()?.image" [src]="user()?.image" />
-      <ion-icon *ngIf="!user()?.image" class="empty-icon" name="person-circle-outline"></ion-icon>
-    </ion-avatar>
-
-    <ion-button
-      color="primary"
-      class="photo-btn"
-      (click)="takeImage()"
-      mode="ios"
-      size="small"
-      shape="round"
-    >
-      Cambiar foto
-    </ion-button>
-
+    <img class="perfil-icon" src="../assets/icon/perfilEstudiante.svg" alt="">
     <ion-card-header>
       <ion-card-title class="user-name">{{ user()?.name }}</ion-card-title>
     </ion-card-header>
@@ -52,7 +37,7 @@
       </ion-item>
 
       <ion-item button detail>
-        <ion-label>Términos & Condiciones</ion-label>
+        <ion-label routerLink="/terms">Términos & Condiciones</ion-label>
       </ion-item>
 
       <br /><br /><br /><br /><br /><br /><br /><br /><br />
