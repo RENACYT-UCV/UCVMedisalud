@@ -1,9 +1,10 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'UCV_MEDIC',
-  webDir: 'www'
+  appId: 'com.mmc.medisaludusuario',
+  appName: 'Medisalud Usuario',
+  webDir: 'www',
+  bundledWebRuntime: false
 };
 
 export default config;

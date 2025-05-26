@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Medisalud Usuario</string>
+    <string name="title_activity_main">Medisalud Usuario</string>
+    <string name="package_name">com.mmc.medisaludusuario</string>
+    <string name="custom_url_scheme">com.mmc.medisaludusuario</string>
+</resources>
