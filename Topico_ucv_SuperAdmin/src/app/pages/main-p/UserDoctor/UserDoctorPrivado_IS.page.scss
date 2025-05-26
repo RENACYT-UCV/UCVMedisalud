@@ -1,48 +1,51 @@
-ion-item.user-item {
+.user-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 16px 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
   }
 
-  ion-label {
-    flex: 1;
-    padding-right: 20px;
-  }
-
-
- 
   .user-name {
-    font-size: 24px;
-    font-weight: 800;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 900;
+    color: #222;
+    margin-bottom: 12px;
+    text-transform: capitalize;
   }
-
 
   .user-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+
     p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #666;
+      margin: 0;
+      font-size: 15px;
+      color: #555;
 
       strong {
-        color: #333;
-        margin-right: 5px;
+        color: #000;
+        margin-right: 6px;
+        font-weight: 600;
       }
     }
   }
 
   .user-status-select {
-    min-width: 150px;
-    margin-left: 20px;
+    align-self: flex-start;
+    min-width: 160px;
+    margin-left: auto;
+    font-weight: 600;
+    color: #444;
   }
 }

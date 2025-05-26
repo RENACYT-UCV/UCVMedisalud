@@ -1,7 +1,10 @@
-.btn-azul {
-    --background: #003B5C; // Este es un tono de azul
-    --background-activated: #0056b3; // Un tono de azul más oscuro para cuando se presiona el botón
+ion-button {
+ --background: #fdab28;
+    --background-activated: #b1781c;
+    --background-focused: #fdab28;
+    --background-hover: #ffc261;
+    --color: black;
   }
  .background{
-  color: #003B5C;
+  color: #fdab28;
  }

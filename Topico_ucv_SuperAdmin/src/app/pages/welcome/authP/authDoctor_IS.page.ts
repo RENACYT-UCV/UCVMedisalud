@@ -19,6 +19,11 @@ export class AuthDoctor_ISPage implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })
+
+  // Variable para controlar el tipo de input de la contraseña
+  passwordFieldType: 'password' | 'text' = 'password';
+
+
   firebaseSvc = inject(FirebaseService_Datos);
   utilsSvc= inject(UtilsService_Image)
   togglePassword() {
@@ -51,6 +56,12 @@ export class AuthDoctor_ISPage implements OnInit {
       })
     }
   }
+
+ // Función para alternar la visibilidad de la contraseña
+    togglePasswordVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+    }
+  
 
   async getUserInfo(uid:string) {
     if(this.form.valid){

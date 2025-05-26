@@ -1,4 +1,4 @@
-<app-header-estudiante-ms [isModal]="true" [title]="cita ? 'Actualizar Cita' : 'Agregar Cita'"></app-header-estudiante-ms>
+<app-header-estudiante-ms backButton="/horario" [isModal]="true" [title]="cita ? 'Actualizar Cita' : 'Agregar Cita'"></app-header-estudiante-ms>
 
 <ion-content>
   <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">

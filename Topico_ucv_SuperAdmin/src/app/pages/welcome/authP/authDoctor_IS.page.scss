@@ -14,9 +14,10 @@
   width: 80%;             // Se adapta al ancho del contenedor
   max-width: 300px;       // Límite máximo para pantallas grandes
   height: auto;           // Mantiene la proporción original
-  margin-top: -100px;      // Ajusta según lo que quieras moverla
+      
   display: block;
-  margin-left: 45px;
+  margin-left: 40px;
+
 }
 
 .logo {
@@ -89,7 +90,7 @@ text-decoration: underline;
 }
 
 .submit-button {
---background:  #000000;
+
 --color: white;
 margin-bottom: 10px;
 }
@@ -127,4 +128,12 @@ display: flex;
 justify-content: center;
 align-items: center;
 color: #000000;
+}
+
+
+ion-button{
+     --background: #00bf63;
+    --background-activated: #087c44;
+    --background-focused: #00bf63;
+    --background-hover: #30cc81;
 }

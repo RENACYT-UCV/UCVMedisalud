@@ -47,6 +47,11 @@ export class SignUpPage implements OnInit {
     role: new FormControl('student', [Validators.required]),
   });
 
+  
+    // Variable para controlar el tipo de input de la contraseña
+  passwordFieldType: 'password' | 'text' = 'password';
+
+
   firebaseSvc = inject(FirebaseEDTService);
   utilsSvc = inject(UtilsEDTService);
 
@@ -82,6 +87,13 @@ export class SignUpPage implements OnInit {
         });
     }
   }
+
+
+      // Función para alternar la visibilidad de la contraseña
+    togglePasswordVisibility() {
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+    }
+  
 
   async setUserInfo(uid: string) {
     if (this.form.valid) {
