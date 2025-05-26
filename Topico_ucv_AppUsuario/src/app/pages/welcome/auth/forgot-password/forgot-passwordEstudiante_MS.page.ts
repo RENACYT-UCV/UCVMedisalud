@@ -14,40 +14,43 @@ import { User } from 'firebase/auth';
 export class ForgotPasswordPage implements OnInit {
   form = new FormGroup({
     hotm: new FormControl('', [Validators.required, Validators.email]),
-
-  })
+  });
 
   firebaseSvc = inject(FirebaseEDTService);
-  utilSvc = inject(UtilsEDTService)
+  utilSvc = inject(UtilsEDTService);
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   async submit() {
     if (this.form.valid) {
       const loading = await this.utilSvc.loading();
       await loading.present();
-      this.firebaseSvc.sendRecoveryEmail(this.form.value.hotm).then(res => {
-        this.utilSvc.presentToast({
-          message: 'Correo enviado con exito',
-          duration: 2500,
-          color: 'primary',
-          position: 'middle',
-          icon: 'mail-outline'
-        }) 
-        this.utilSvc.routerLink('/auth');
-        this.form.reset();
-      }).catch(error => {
-        console.log(error);
-        this.utilSvc.presentToast({
-          message: error.message,
-          duration: 2500,
-          color: 'primary',
-          position: 'middle',
-          icon: 'alert-circle-outline'
+
+      this.firebaseSvc
+        .sendRecoveryEmail(this.form.value.hotm)
+        .then(() => {
+          this.utilSvc.presentToast({
+            message: 'Correo enviado con éxito',
+            duration: 2500,
+            color: 'primary',
+            position: 'middle',
+            icon: 'mail-outline',
+          });
+          this.form.reset();
+          this.utilSvc.routerLink('/auth'); // O usa this.router.navigate(['/auth']);
         })
-      }).finally(() => {
-        loading.dismiss();
-      })
+        .catch((error) => {
+          console.log(error);
+          this.utilSvc.presentToast({
+            message: error.message,
+            duration: 2500,
+            color: 'primary',
+            position: 'middle',
+            icon: 'alert-circle-outline',
+          });
+        })
+        .finally(() => {
+          loading.dismiss();
+        });
     }
   }
 }
