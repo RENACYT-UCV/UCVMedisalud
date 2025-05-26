@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100vw;
   padding: 20px;
   margin: 0;
   box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
@@ -12,10 +13,11 @@
 
 .form-container {
   background-color: rgba(163, 45, 45, 0.829); /* Fondo rojo translúcido */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 40px;
   width: 100%;
-  max-width: 600px; /* Limita el tamaño máximo en escritorios */
+  height: 100%;
+    // max-width: 600px; /* Limita el tamaño máximo en escritorios */
   text-align: center;
   display: flex;
   flex-direction: column;
