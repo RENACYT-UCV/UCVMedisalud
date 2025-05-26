@@ -40,7 +40,7 @@ export class password_Doctor implements OnInit {
           position: 'middle',
           icon: 'mail-outline'
         }) 
-        this.utilSvc.routerLink('/auth');
+        this.utilSvc.routerLink('/welcome/authP');
         this.form.reset();
 
 
