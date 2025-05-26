@@ -32,22 +32,22 @@
     </div>
     <ion-item>
       <ion-label position="floating">Teléfono</ion-label>
-      <ion-input type="tel" formControlName="fono"></ion-input>
+      <ion-input type="tel" formControlName="phone"></ion-input>
     </ion-item>
 
     <ion-item >
       <ion-label position="floating">DNI</ion-label>
-      <ion-input type="text" formControlName="identific"></ion-input>
+      <ion-input type="text" formControlName="dni"></ion-input>
     </ion-item>
 
     <ion-item >
       <ion-label position="floating">Edad</ion-label>
-      <ion-input type="text" formControlName="ed"></ion-input>
+      <ion-input type="text" formControlName="edad"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Facultad</ion-label>
-      <ion-select formControlName="carre">
+      <ion-select formControlName="facultad" placeholder="Seleccione una facultad">
         <!-- Aquí puedes agregar las opciones de facultades -->
         <ion-select-option *ngFor="let fac of carre" [value]="fac">{{fac}}</ion-select-option>
       </ion-select>
